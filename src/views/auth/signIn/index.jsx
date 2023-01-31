@@ -66,7 +66,10 @@ function SignIn() {
     { bg: "whiteAlpha.200" }
   );
   const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
+  const handleClick = () => {
+    setShow(!show);
+    router
+  }
   return (
     // <DefaultAuth illustrationBackground={illustration} image={illustration}>
     <DefaultAuth>
