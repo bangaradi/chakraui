@@ -83,7 +83,13 @@ export default function UserReports() {
       // backdropFilter='blur(10px) hue-rotate(90deg)'
     />
   )
-  const [projectName, setProjectName] = useState("");
+  // const [tableData, setTableData] = useState([{
+  //   "name":"",
+  //   "status": "",
+  //   "date": "",
+  //   "progress": 0  
+  // },]);
+  const [projectData, setProjectData] = useState([{}]);
   const [overlay, setOverlay] = React.useState(<OverlayOne />)
   const [show, setShow] = useState(false);
   // Chakra Color Mode
@@ -198,9 +204,10 @@ export default function UserReports() {
           <MiniCalendar h='100%' minW='100%' selectRange={false} />
         </SimpleGrid> */}
       </SimpleGrid>
-      <Text>
+      {/* <Text>
+
         Project Name: {projectName}
-      </Text>
+      </Text> */}
       <Button onClick={() => {
         setOverlay(<OverlayOne />)
         onOpenAdd()
@@ -214,7 +221,7 @@ export default function UserReports() {
           <ModalCloseButton />
           <ModalHeader>Add Project</ModalHeader>
           <ModalBody>
-            <Stepper setProjectName={setProjectName}/>
+            <Stepper projectData = {projectData} setProjectData={setProjectData} onCloseAdd = {onCloseAdd}/>
             {/* <Input
                                 placeholder="Select Date and Time"
                                 size="md"
@@ -237,9 +244,9 @@ export default function UserReports() {
             {/* </Select> */}
             {/* <Text>Custom backdrop filters!</Text> */}
           </ModalBody>
-          <ModalFooter>
-            <Button onClick={onCloseAdd}>Close</Button>
-          </ModalFooter>
+          {/* <ModalFooter> */}
+            {/* <Button onClick={onCloseAdd}>Close</Button> */}
+          {/* </ModalFooter> */}
         </ModalContent>
       </Modal>
     </Box >

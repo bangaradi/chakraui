@@ -74,7 +74,7 @@ const columnsDataComplex = [
         accessor: "date",
     },
     {
-        Header: "PROGRESS",
+        Header: "ACTIONS",
         accessor: "progress",
     },
 ];
@@ -126,7 +126,7 @@ function RadioCard(props) {
 }
 
 
-export default function Stepper({setProjectName}) {
+export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
     const textColor = useColorModeValue("gray.700", "white");
     const bgPrevButton = useColorModeValue("gray.100", "gray.100");
     const iconColor = useColorModeValue("gray.300", "gray.700");
@@ -183,7 +183,14 @@ export default function Stepper({setProjectName}) {
         defaultValue: 'react',
         onChange: console.log,
     });
+    // const [data, setData] = useState({})
+    const [projectName, setProjectName] = useState("");
+    const [date, setDate] = useState("");
+    function getDate(){
+        var today = new Date().toLocaleString();
+        setDate(today);
 
+    }
     const group = getRootProps()
 
     const [overlay, setOverlay] = React.useState(<OverlayOne />)
@@ -453,8 +460,11 @@ export default function Stepper({setProjectName}) {
                                                         borderRadius="15px"
                                                         placeholder="eg. Michael"
                                                         fontSize="xs"
-                                                        onChange= { (event) => {
-                                                            setProjectName(event.target.value)}
+                                                        onChange={(event) => {
+                                                            getDate();
+                                                            setProjectName(event.target.value);
+                                                            console.log(projectName);
+                                                        }
                                                         }
                                                     />
                                                 </FormControl>
@@ -1200,6 +1210,14 @@ export default function Stepper({setProjectName}) {
                                                 mt="24px"
                                                 w={{ sm: "75px", lg: "100px" }}
                                                 h="35px"
+                                                onClick={() => {
+                                                    onCloseAdd();
+                                                    var data = [];
+                                                    data = projectData;
+                                                    // data.push({name: projectName, date: date});
+                                                    // console.log(projectData);
+
+                                                }}
                                             >
                                                 <Text fontSize="xs" color="#fff" fontWeight="bold">
                                                     SEND
