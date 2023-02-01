@@ -106,7 +106,20 @@ const columnsDataComplex = [
 
 
 export default function NodeDashboard(params) {
-  console.log("socket", socket.id);
+
+  // let checkHash = ""
+  const [checkHash, setCheckHash] = useState("");
+  // let str = ""
+  const [nodeStr, setNodeStr] = useState("");
+  // let checkHash_l = 0;
+  const [checkHash_l, setCheckHash_l] = useState(0);
+  // let found = -1;
+  const [found, setFound] = useState(-1);
+
+  let start_time = 0
+  let end_time = 0
+
+  // console.log("socket", socket.id);
   const textColor = useColorModeValue("gray.700", "white");
   const bgPrevButton = useColorModeValue("gray.100", "gray.100");
   const iconColor = useColorModeValue("gray.300", "gray.700");
@@ -131,10 +144,55 @@ export default function NodeDashboard(params) {
   // const [socket, setSocket] = useState({});
   // const socket = io.connect('http://localhost:3001');
 
-  // useEffect(()=>{
-  //   // setSocket(io.connect('http://localhost:3001'));
-  //   console.log("inside useEffect");
-  // },[send])
+  function implementSearch(nodeStr, checkHash){
+    let str_l = nodeStr.length;
+    let checkHash_l = checkHash.length;
+    // let count = 0;
+    for(let i = 0; i < str_l; i++){
+        let temp = nodeStr.substring(i, i+checkHash_l);
+        if(temp === checkHash){
+            console.log("found at: ", i);
+            return i;
+        }
+    }
+    console.log("not found");
+    return -1;
+  }
+
+  useEffect(()=>{
+    socket.on("get checkHash", function(data){
+      console.log("checkHash is: ",data);
+      // checkHash = data;
+      setCheckHash(data);
+      // checkHash_l = checkHash.length;
+      setCheckHash_l(data.length);
+
+    });
+    
+    socket.on("disconnect it", function(){
+        socket.disconnect();
+    });
+    
+    socket.on("get data", function(data){
+        // console.log("str is : ", data);
+        // str = data;
+        setNodeStr(data);
+    
+        // start_time = new Date().getTime();
+        // found = implementSearch(str, checkHash);
+        setFound(implementSearch(data, checkHash));
+        // end_time = new Date().getTime();
+        // console.log("time taken: ", end_time - start_time);
+        if(found > -1){
+            console.log("found");
+            socket.emit("found", {found:found, id:socket.id});
+        }else{
+            console.log("not found");
+            socket.emit("found", {found:found, id:socket.id});
+        }
+    
+    });
+  },[socket])
 
   // const brandColor = useColorModeValue("brand.500", "white");
   // const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
