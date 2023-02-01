@@ -30,7 +30,21 @@ import {
   Select,
   SimpleGrid,
   useColorModeValue,
+  Button
 } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Text,
+  HStack,
+  RadioGroup,
+  Link
+} from '@chakra-ui/react'
 // Assets
 import Usa from "assets/img/dashboards/usa.png";
 // Custom components
@@ -58,9 +72,18 @@ import {
 } from "views/admin/default/variables/columnsData";
 import tableDataCheck from "views/admin/default/variables/tableDataCheck.json";
 import tableDataComplex from "views/admin/default/variables/tableDataComplex.json";
-
+import { useDisclosure } from '@chakra-ui/react'
+import Stepper from "./components/Stepper";
 
 export default function UserReports() {
+  const { isOpen: isOpenAdd, onOpen: onOpenAdd, onClose: onCloseAdd } = useDisclosure()
+  const OverlayOne = () => (
+    <ModalOverlay
+      bg='blackAlpha.300'
+      backdropFilter='blur(10px) hue-rotate(90deg)'
+    />
+  )
+  const [overlay, setOverlay] = React.useState(<OverlayOne />)
   const [show, setShow] = useState(false);
   // Chakra Color Mode
   const brandColor = useColorModeValue("brand.500", "white");
@@ -174,6 +197,47 @@ export default function UserReports() {
           <MiniCalendar h='100%' minW='100%' selectRange={false} />
         </SimpleGrid> */}
       </SimpleGrid>
-    </Box>
+      <Button onClick={() => {
+        setOverlay(<OverlayOne />)
+        onOpenAdd()
+      }}>
+
+        Add Project
+      </Button>
+      <Modal isCentered isOpen={isOpenAdd} onClose={onCloseAdd}>
+        {overlay}
+        <ModalContent>
+          <ModalHeader>Add Project</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Stepper />
+            {/* <Input
+                                placeholder="Select Date and Time"
+                                size="md"
+                                type="file"
+                                onChange={(file) => {
+                                  handleFile(file)
+                                }
+                                }
+                              /> */}
+            {/* <Select
+                                    cursor="pointer"
+                                    bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
+                                    borderColor="gray.400"
+                                    color='white'
+                                    placeholder='Choose a Server'
+                                  >
+                                    <option value='option1'>Server 1</option>
+                                    <option value='option2'>Server 2</option>
+                                    {/* <option value='option3'>Option 3</option> */}
+            {/* </Select> */}
+            <Text>Custom backdrop filters!</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={onCloseAdd}>Upload</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </Box >
   );
 }
