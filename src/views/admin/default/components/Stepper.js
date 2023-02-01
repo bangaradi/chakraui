@@ -186,7 +186,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
     // const [data, setData] = useState({})
     const [projectName, setProjectName] = useState("");
     const [date, setDate] = useState("");
-    function getDate(){
+    function getDate() {
         var today = new Date().toLocaleString();
         setDate(today);
 
@@ -463,7 +463,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                         onChange={(event) => {
                                                             getDate();
                                                             setProjectName(event.target.value);
-                                                            console.log(projectName);
+                                                            // console.log(projectName);
                                                         }
                                                         }
                                                     />
@@ -1214,8 +1214,8 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                     onCloseAdd();
                                                     var data = [];
                                                     data = projectData;
-                                                    // data.push({name: projectName, date: date});
-                                                    // console.log(projectData);
+                                                    data.push({ name: projectName, status: "In progress", date: date, progress: 0 });
+                                                    console.log(projectData);
 
                                                 }}
                                             >

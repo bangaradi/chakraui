@@ -45,6 +45,17 @@ import {
   RadioGroup,
   Link
 } from '@chakra-ui/react'
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+} from '@chakra-ui/react'
 // Assets
 import Usa from "assets/img/dashboards/usa.png";
 // Custom components
@@ -52,7 +63,7 @@ import MiniCalendar from "components/calendar/MiniCalendar";
 import MiniStatistics from "components/card/MiniStatistics";
 import IconBox from "components/icons/IconBox";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   MdAddTask,
   MdAttachMoney,
@@ -80,7 +91,7 @@ export default function UserReports() {
   const OverlayOne = () => (
     <ModalOverlay
       bg='whiteAlpha.900'
-      // backdropFilter='blur(10px) hue-rotate(90deg)'
+    // backdropFilter='blur(10px) hue-rotate(90deg)'
     />
   )
   // const [tableData, setTableData] = useState([{
@@ -89,10 +100,26 @@ export default function UserReports() {
   //   "date": "",
   //   "progress": 0  
   // },]);
-  const [projectData, setProjectData] = useState([{}]);
+  const [tableData, setTableData] = useState([{}]);
+  const [projectData, setProjectData] = useState([{
+    "name": "Project 1",
+    "status": "Completed",
+    "date": "2 Feb 2023",
+    "progress": 100,
+  }, {
+    "name": "Project 2",
+    "status": "Completed",
+    "date": "10 Feb 2023",
+    "progress": 100,
+  }]);
+  // const [projectData, setProjectData] = useState([{}]);
   const [overlay, setOverlay] = React.useState(<OverlayOne />)
   const [show, setShow] = useState(false);
   // Chakra Color Mode
+  useEffect(() => {
+    setTableData(projectData);
+    console.log(tableData);
+  }, [projectData, setTableData]);
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
   return (
@@ -182,6 +209,25 @@ export default function UserReports() {
           value='2935'
         />
       </SimpleGrid>
+      <TableContainer>
+        <Table variant='simple'>
+          <Thead>
+            <Tr>
+              <Th> Name</Th>
+              <Th>Status</Th>
+              <Th> Date</Th>
+              <Th>Actions</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            <Tr>
+              <Td>to convert</Td>
+              <Td>to convert</Td>
+              <Td>to convert</Td>
+            </Tr>
+          </Tbody>
+        </Table>
+      </TableContainer>
 
       {/* <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px' mb='20px'>
         <TotalSpent />
@@ -194,16 +240,21 @@ export default function UserReports() {
           <PieCard />
         </SimpleGrid>
       </SimpleGrid> */}
-      <SimpleGrid columns={{ base: 1, md: 1, xl: 1 }} gap='20px' mb='20px'>
+      {/* <SimpleGrid columns={{ base: 1, md: 1, xl: 1 }} gap='20px' mb='20px'>
         <ComplexTable
           columnsData={columnsDataComplex}
-          tableData={tableDataComplex}
-        />
+          tableData={tableData}
+        /> */}
+        {/* <Text>{tableData[2].name}</Text> */}
+        {/* <Text>{projectData[1].name}</Text>
+        <Text>{projectData[2].name}</Text> */}
         {/* <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
           <Tasks />
           <MiniCalendar h='100%' minW='100%' selectRange={false} />
         </SimpleGrid> */}
-      </SimpleGrid>
+      {/* </SimpleGrid> */}
+      {/* <Text>{tableData[2].name}</Text> */}
+
       {/* <Text>
 
         Project Name: {projectName}
@@ -221,7 +272,7 @@ export default function UserReports() {
           <ModalCloseButton />
           <ModalHeader>Add Project</ModalHeader>
           <ModalBody>
-            <Stepper projectData = {projectData} setProjectData={setProjectData} onCloseAdd = {onCloseAdd}/>
+            <Stepper projectData={projectData} setProjectData={setProjectData} onCloseAdd={onCloseAdd} />
             {/* <Input
                                 placeholder="Select Date and Time"
                                 size="md"
@@ -245,7 +296,7 @@ export default function UserReports() {
             {/* <Text>Custom backdrop filters!</Text> */}
           </ModalBody>
           {/* <ModalFooter> */}
-            {/* <Button onClick={onCloseAdd}>Close</Button> */}
+          {/* <Button onClick={onCloseAdd}>Close</Button> */}
           {/* </ModalFooter> */}
         </ModalContent>
       </Modal>
