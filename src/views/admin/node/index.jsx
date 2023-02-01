@@ -29,6 +29,8 @@ import { Flex, Spacer } from "@chakra-ui/react";
 import { FormLabel } from "@chakra-ui/react";
 import { Avatar } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
+import socket from "../socket";
+// console.log("socket", socket);
 import Usa from "assets/img/dashboards/usa.png";
 import {
   Stat,
@@ -53,7 +55,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 // Custom components
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { AiFillSetting } from "react-icons/ai";
 import { BsCircleFill } from "react-icons/bs";
 import { FaCube } from "react-icons/fa";
@@ -104,6 +106,7 @@ const columnsDataComplex = [
 
 
 export default function NodeDashboard(params) {
+  console.log("socket", socket.id);
   const textColor = useColorModeValue("gray.700", "white");
   const bgPrevButton = useColorModeValue("gray.100", "gray.100");
   const iconColor = useColorModeValue("gray.300", "gray.700");
@@ -120,12 +123,19 @@ export default function NodeDashboard(params) {
     code: false,
     develop: false
   });
-
   const [input, setInput] = useState("");
-
+  const [send, setSend] = useState(0);
   const aboutTab = useRef();
   const accountTab = useRef();
   const addressTab = useRef();
+  // const [socket, setSocket] = useState({});
+  // const socket = io.connect('http://localhost:3001');
+
+  // useEffect(()=>{
+  //   // setSocket(io.connect('http://localhost:3001'));
+  //   console.log("inside useEffect");
+  // },[send])
+
   // const brandColor = useColorModeValue("brand.500", "white");
   // const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
   const OverlayOne = () => (
@@ -782,8 +792,9 @@ export default function NodeDashboard(params) {
                         mt="24px"
                         w={{ sm: "75px", lg: "100px" }}
                         h="35px"
+                        onClick={()=>setSend(1)}
                       >
-                        <Text fontSize="xs" color="#fff" fontWeight="bold">
+                        <Text fontSize="xs" color="#fff" fontWeight="bold" >
                           SEND
                         </Text>
                       </Button>
