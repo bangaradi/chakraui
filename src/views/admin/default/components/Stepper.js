@@ -38,6 +38,7 @@ import {
     StatArrow,
     StatGroup,
 } from "@chakra-ui/react"
+import { Dispatch } from "react";
 import {
     Button,
     Checkbox,
@@ -125,7 +126,7 @@ function RadioCard(props) {
 }
 
 
-export default function Stepper(params) {
+export default function Stepper({setProjectName}) {
     const textColor = useColorModeValue("gray.700", "white");
     const bgPrevButton = useColorModeValue("gray.100", "gray.100");
     const iconColor = useColorModeValue("gray.300", "gray.700");
@@ -241,7 +242,7 @@ export default function Stepper(params) {
       </SimpleGrid> */}
             <Flex
                 direction="column"
-                minH="100vh"
+                minH="70vh"
                 align="center"
                 pt={{ sm: "125px", lg: "75px" }}
             >
@@ -452,6 +453,9 @@ export default function Stepper(params) {
                                                         borderRadius="15px"
                                                         placeholder="eg. Michael"
                                                         fontSize="xs"
+                                                        onChange= { (event) => {
+                                                            setProjectName(event.target.value)}
+                                                        }
                                                     />
                                                 </FormControl>
                                                 <FormControl>

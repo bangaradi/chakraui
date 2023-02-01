@@ -83,6 +83,7 @@ export default function UserReports() {
       // backdropFilter='blur(10px) hue-rotate(90deg)'
     />
   )
+  const [projectName, setProjectName] = useState("");
   const [overlay, setOverlay] = React.useState(<OverlayOne />)
   const [show, setShow] = useState(false);
   // Chakra Color Mode
@@ -197,6 +198,9 @@ export default function UserReports() {
           <MiniCalendar h='100%' minW='100%' selectRange={false} />
         </SimpleGrid> */}
       </SimpleGrid>
+      <Text>
+        Project Name: {projectName}
+      </Text>
       <Button onClick={() => {
         setOverlay(<OverlayOne />)
         onOpenAdd()
@@ -210,7 +214,7 @@ export default function UserReports() {
           <ModalCloseButton />
           <ModalHeader>Add Project</ModalHeader>
           <ModalBody>
-            <Stepper />
+            <Stepper setProjectName={setProjectName}/>
             {/* <Input
                                 placeholder="Select Date and Time"
                                 size="md"
