@@ -79,8 +79,8 @@ export default function UserReports() {
   const { isOpen: isOpenAdd, onOpen: onOpenAdd, onClose: onCloseAdd } = useDisclosure()
   const OverlayOne = () => (
     <ModalOverlay
-      bg='blackAlpha.300'
-      backdropFilter='blur(10px) hue-rotate(90deg)'
+      bg='whiteAlpha.900'
+      // backdropFilter='blur(10px) hue-rotate(90deg)'
     />
   )
   const [overlay, setOverlay] = React.useState(<OverlayOne />)
@@ -204,11 +204,11 @@ export default function UserReports() {
 
         Add Project
       </Button>
-      <Modal isCentered isOpen={isOpenAdd} onClose={onCloseAdd}>
-        {overlay}
+      <Modal isCentered isOpen={isOpenAdd} onClose={onCloseAdd} size='full'>
+        {/* {overlay} */}
         <ModalContent>
-          <ModalHeader>Add Project</ModalHeader>
           <ModalCloseButton />
+          <ModalHeader>Add Project</ModalHeader>
           <ModalBody>
             <Stepper />
             {/* <Input
@@ -231,10 +231,10 @@ export default function UserReports() {
                                     <option value='option2'>Server 2</option>
                                     {/* <option value='option3'>Option 3</option> */}
             {/* </Select> */}
-            <Text>Custom backdrop filters!</Text>
+            {/* <Text>Custom backdrop filters!</Text> */}
           </ModalBody>
           <ModalFooter>
-            <Button onClick={onCloseAdd}>Upload</Button>
+            <Button onClick={onCloseAdd}>Close</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
