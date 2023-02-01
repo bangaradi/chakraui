@@ -1,25 +1,25 @@
 [
   {
     "name":"Horizon UI PRO",
-    "status": "Approved",
+    "status": "Completed",
     "date": "18 Apr 2022",
     "progress": 75.5  
   },
   {
     "name":"Horizon UI Free",
-    "status": "Disable",
+    "status": "Not started",
     "date": "18 Apr 2022",
     "progress": 25.5  
   },
   {
     "name":"Marketplace",
-    "status": "Error",
+    "status": "In progress",
     "date": "20 May 2021",
     "progress": 90  
   },
   {
     "name":"Weekly Updates",
-    "status": "Approved",
+    "status": "Completed",
     "date": "12 Jul 2021",
     "progress": 50.5  
   }

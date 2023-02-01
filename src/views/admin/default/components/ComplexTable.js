@@ -11,7 +11,7 @@ import {
   Tr,
   useColorModeValue,
 } from "@chakra-ui/react";
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import {
   useGlobalFilter,
   usePagination,
@@ -24,12 +24,14 @@ import Card from "components/card/Card";
 import Menu from "components/menu/MainMenu";
 
 // Assets
-import { MdCheckCircle, MdCancel, MdOutlineError } from "react-icons/md";
+import { MdCheckCircle } from "react-icons/md";
+import { BiAnalyse, BiArrowFromBottom } from "react-icons/bi";
 export default function ColumnsTable(props) {
   const { columnsData, tableData } = props;
 
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
+  const [showProgress, setShowProgress] = useState("Not started");
 
   const tableInstance = useTable(
     {
@@ -112,21 +114,21 @@ export default function ColumnsTable(props) {
                           h='24px'
                           me='5px'
                           color={
-                            cell.value === "Approved"
+                            cell.value === "Completed"
                               ? "green.500"
-                              : cell.value === "Disable"
+                              : cell.value === "Not started"
                               ? "red.500"
-                              : cell.value === "Error"
+                              : cell.value === "In progress"
                               ? "orange.500"
                               : null
                           }
                           as={
-                            cell.value === "Approved"
+                            cell.value === "Completed"
                               ? MdCheckCircle
-                              : cell.value === "Disable"
-                              ? MdCancel
-                              : cell.value === "Error"
-                              ? MdOutlineError
+                              : cell.value === "Not started"
+                              ? BiArrowFromBottom
+                              : cell.value === "In progress"
+                              ? BiAnalyse
                               : null
                           }
                         />
