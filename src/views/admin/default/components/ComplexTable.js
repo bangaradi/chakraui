@@ -28,7 +28,7 @@ import Menu from "components/menu/MainMenu";
 import { MdCheckCircle } from "react-icons/md";
 import { BiAnalyse, BiArrowFromBottom } from "react-icons/bi";
 export default function ColumnsTable(props) {
-  const { columnsData, tableData } = props;
+  const { columnsData, tableData, startProject } = props;
   const [clicked, toggleClicked] = useState(false);
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
@@ -37,6 +37,7 @@ export default function ColumnsTable(props) {
   const onClick = () => {
     toggleClicked(!clicked);
     setShowProgress("In progress");
+    startProject();
   };
 
   const tableInstance = useTable(
@@ -160,7 +161,7 @@ export default function ColumnsTable(props) {
                           value={cell.value}
                         /> */}
                         <Button 
-                        isLoading={clicked}
+                        // isLoading={clicked}
                         onClick={onClick}
                         >START</Button>
                         

@@ -8,8 +8,8 @@ import { SidebarContext } from "contexts/SidebarContext";
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "routes.js";
-import io from "socket.io-client";
-
+// import io from "socket.io-client";
+import socket from "views/admin/socket";
 // const socket = io("http://localhost:3001");
 
 // Custom Chakra theme
@@ -95,11 +95,14 @@ export default function Dashboard(props) {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
         return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
+          // <Route
+          //   path={prop.layout + prop.path}
+          //   component={prop.component}
+          //   key={key}
+          // />
+          <Route path={prop.layout + prop.path} key={key}>
+            <prop.component socket={socket}/>
+          </Route>
         );
       }
       if (prop.collapse) {

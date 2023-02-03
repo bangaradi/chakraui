@@ -107,8 +107,9 @@ const columnsDataComplex = [
 
 export default function NodeDashboard(params) {
 
+  let checkHash = useRef("");
   // let checkHash = ""
-  const [checkHash, setCheckHash] = useState("");
+  // const [checkHash, setCheckHash] = useState("");
   // let str = ""
   const [nodeStr, setNodeStr] = useState("");
   // let checkHash_l = 0;
@@ -143,6 +144,10 @@ export default function NodeDashboard(params) {
   const addressTab = useRef();
   // const [socket, setSocket] = useState({});
   // const socket = io.connect('http://localhost:3001');
+  const joinNode = () => {
+    params.socket.emit("join node", params.socket.id);
+    params.socket.emit("get checkHash");
+  };
 
   function implementSearch(nodeStr, checkHash) {
     let str_l = nodeStr.length;
@@ -159,40 +164,47 @@ export default function NodeDashboard(params) {
     return -1;
   }
 
-  useEffect(() => {
-    socket.on("get checkHash", function (data) {
-      console.log("checkHash is: ", data);
-      // checkHash = data;
-      setCheckHash(data);
+  useEffect(()=>{
+    params.socket.on("get checkHash", async function(data){
+      // console.log("checkHash is: ",data);
+      checkHash = data;
+      // setCheckHash(data);
+      console.log("checkHash is: ",checkHash);
       // checkHash_l = checkHash.length;
-      setCheckHash_l(data.length);
 
     });
-
-    socket.on("disconnect it", function () {
-      socket.disconnect();
+    
+    params.socket.on("disconnect it", function(){
+        params.socket.disconnect();
+    });
+    
+    params.socket.on("get data", async function(data){
+        // console.log("str is : ", data);
+        // str = data;
+        // await setNodeStr(data);
+        let found = -1;
+        // start_time = new Date().getTime();
+        // found = implementSearch(str, checkHash);
+        console.log("finding hash: ", checkHash, " in string: ", data);
+        found = implementSearch(data, checkHash)
+        // end_time = new Date().getTime();
+        // console.log("time taken: ", end_time - start_time);
+        if(found > -1){
+            console.log("found");
+            params.socket.emit("found", {found:found, id:params.socket.id, checkHash:checkHash});
+        }else{
+            console.log("not found");
+            params.socket.emit("found", {found:found, id:params.socket.id, checkHash:checkHash});
+        }
+    
     });
 
-    socket.on("get data", function (data) {
-      // console.log("str is : ", data);
-      // str = data;
-      setNodeStr(data);
-
-      // start_time = new Date().getTime();
-      // found = implementSearch(str, checkHash);
-      setFound(implementSearch(data, checkHash));
-      // end_time = new Date().getTime();
-      // console.log("time taken: ", end_time - start_time);
-      if (found > -1) {
-        console.log("found");
-        socket.emit("found", { found: found, id: socket.id });
-      } else {
-        console.log("not found");
-        socket.emit("found", { found: found, id: socket.id });
-      }
-
-    });
-  }, [socket])
+    return () => {
+      params.socket.off('connect');
+      params.socket.off('disconnect');
+      params.socket.off('pong');
+    };
+  },[]);
 
   // const brandColor = useColorModeValue("brand.500", "white");
   // const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
