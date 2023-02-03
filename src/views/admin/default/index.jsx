@@ -247,7 +247,7 @@ export default function UserReports() {
       <SimpleGrid columns={{ base: 1, md: 1, xl: 1 }} gap='20px' mb='20px'>
         <ComplexTable
           columnsData={columnsDataComplex}
-          tableData={tableData}
+          tableData={projectData}
         />
         {/* <Text>{tableData[2].name}</Text> */}
         {/* <Text>{projectData[1].name}</Text>
@@ -276,7 +276,7 @@ export default function UserReports() {
           <ModalCloseButton />
           <ModalHeader>Add Project</ModalHeader>
           <ModalBody>
-            <Stepper projectData={projectData} setProjectData={setProjectData} onCloseAdd={onCloseAdd} />
+            <Stepper projectData={projectData} setProjectData={setProjectData} onCloseAdd={onCloseAdd} />         
             {/* <Input
                                 placeholder="Select Date and Time"
                                 size="md"

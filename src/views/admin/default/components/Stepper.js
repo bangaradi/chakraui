@@ -1225,9 +1225,9 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                     var data = [];
                                                     data = projectData;
                                                     data.push({ name: projectName, status: "In progress", date: date, progress: 0 });
-                                                    setProjectData(data);
-                                                    sessionStorage.setItem("pdata", JSON.stringify(data));
-                                                    window.location.reload();
+                                                    setProjectData(projectData => [...projectData, { name: projectName, status: "In progress", date: date, progress: 0 }]);
+                                                    // sessionStorage.setItem("pdata", JSON.stringify(data));
+                                                    // window.location.reload();
                                                     console.log(projectData);
 
                                                 }}

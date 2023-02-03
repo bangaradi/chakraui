@@ -29,10 +29,15 @@ import { MdCheckCircle } from "react-icons/md";
 import { BiAnalyse, BiArrowFromBottom } from "react-icons/bi";
 export default function ColumnsTable(props) {
   const { columnsData, tableData } = props;
-
+  const [clicked, toggleClicked] = useState(false);
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
   const [showProgress, setShowProgress] = useState("Not started");
+
+  const onClick = () => {
+    toggleClicked(!clicked);
+    setShowProgress("In progress");
+  };
 
   const tableInstance = useTable(
     {
@@ -154,10 +159,10 @@ export default function ColumnsTable(props) {
                           w='108px'
                           value={cell.value}
                         /> */}
-                        <Button onClick={() => {
-                          console.log(cell.value);
-                        }
-                        }>START</Button>
+                        <Button 
+                        isLoading={clicked}
+                        onClick={onClick}
+                        >START</Button>
                         
                       </Flex>
                     );
