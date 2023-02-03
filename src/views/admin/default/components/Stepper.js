@@ -126,7 +126,7 @@ function RadioCard(props) {
 }
 
 
-export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
+export default function Stepper({ projectData, setProjectData, onCloseAdd, setString }) {
     const textColor = useColorModeValue("gray.700", "white");
     const bgPrevButton = useColorModeValue("gray.100", "gray.100");
     const iconColor = useColorModeValue("gray.300", "gray.700");
@@ -142,7 +142,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
         develop: false
     });
 
-    const [input, setInput] = useState("");
+    // const [input, setInput] = useState("");
 
     const aboutTab = useRef();
     const accountTab = useRef();
@@ -164,8 +164,10 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
 
 
         reader.onload = function () {
-            console.log(reader.result);
-            setInput(reader.result);
+            // console.log(reader.result);
+
+            // setInput(reader.result);
+            setString(reader.result);
         };
 
         reader.onerror = function () {

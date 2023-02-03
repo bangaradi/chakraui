@@ -85,6 +85,7 @@ import tableDataCheck from "views/admin/default/variables/tableDataCheck.json";
 import tableDataComplex from "views/admin/default/variables/tableDataComplex.json";
 import { useDisclosure } from '@chakra-ui/react'
 import Stepper from "./components/Stepper";
+import socket from "../socket";
 
 export default function UserReports() {
   const { isOpen: isOpenAdd, onOpen: onOpenAdd, onClose: onCloseAdd } = useDisclosure()
@@ -100,6 +101,7 @@ export default function UserReports() {
   //   "date": "",
   //   "progress": 0  
   // },]);
+  const [string, setString] = useState("");
   const [tableData, setTableData] = useState([{}]);
   const [projectData, setProjectData] = useState([{
     "name": "Project 1",
@@ -116,14 +118,26 @@ export default function UserReports() {
   const [overlay, setOverlay] = React.useState(<OverlayOne />)
   const [show, setShow] = useState(false);
   // Chakra Color Mode
+  // useEffect(() => {
+  //   setTableData(projectData);
+  //   var data;
+  //   data = sessionStorage.getItem("pdata");
+  //   if (data === null) return;
+  //   console.log(data);
+  //   setTableData(JSON.parse(data));
+  // }, [projectData, setTableData]);
   useEffect(() => {
-    setTableData(projectData);
-    var data;
-    data = sessionStorage.getItem("pdata");
-    if (data === null) return;
-    console.log(data);
-    setTableData(JSON.parse(data));
-  }, [projectData, setTableData]);
+    socket.emit("join provider", socket.id);
+  },[]);
+  // const joinProvider = () => {
+    // socket.emit("join provider", socket.id);
+  // };
+  const startProject = async () => {
+    await socket.emit("split data", string);
+    console.log(string);
+    console.log("start project");
+  };
+
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
   return (
@@ -248,6 +262,7 @@ export default function UserReports() {
         <ComplexTable
           columnsData={columnsDataComplex}
           tableData={projectData}
+          startProject={startProject}
         />
         {/* <Text>{tableData[2].name}</Text> */}
         {/* <Text>{projectData[1].name}</Text>
@@ -276,7 +291,7 @@ export default function UserReports() {
           <ModalCloseButton />
           <ModalHeader>Add Project</ModalHeader>
           <ModalBody>
-            <Stepper projectData={projectData} setProjectData={setProjectData} onCloseAdd={onCloseAdd} />         
+            <Stepper projectData={projectData} setProjectData={setProjectData} onCloseAdd={onCloseAdd} setString={setString}/>         
             {/* <Input
                                 placeholder="Select Date and Time"
                                 size="md"
