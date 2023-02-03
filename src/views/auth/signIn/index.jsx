@@ -23,6 +23,7 @@
 
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useDisclosure } from '@chakra-ui/react'
 // Chakra imports
 import {
   Box,
@@ -39,6 +40,19 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  // Text,
+  HStack,
+  RadioGroup,
+  Link
+} from '@chakra-ui/react'
 // Custom components
 import { HSeparator } from "components/separator/Separator";
 import DefaultAuth from "layouts/auth/Default";
@@ -65,6 +79,7 @@ function SignIn() {
     { bg: "secondaryGray.300" },
     { bg: "whiteAlpha.200" }
   );
+  const { isOpen: isOpenNav, onOpen: onOpenNav, onClose: onCloseNav } = useDisclosure()
   const [show, setShow] = React.useState(false);
   const handleClick = () => {
     setShow(!show);
@@ -211,11 +226,33 @@ function SignIn() {
               fontWeight='500'
               w='100%'
               h='50'
-              mb='24px'>
+              mb='24px'
+              onClick={() => {
+                console.log("Clicked");
+              }}>
               Sign In
             </Button>
+            <Modal isCentered isOpen={isOpenNav} onClose={onCloseNav} size='full'>
+              <ModalContent>
+              <ModalHeader>Choose your Role</ModalHeader>
+              <ModalBody>
+              <Button
+              fontSize='sm'
+              variant='brand'
+              fontWeight='500'
+              w='100%'
+              h='50'
+              mb='24px'
+              onClick={() => {
+                console.log("Clicked");
+              }}>
+              Sign In
+            </Button>
+              </ModalBody>
+              </ModalContent>
+            </Modal>
           </FormControl>
-          <Flex
+          {/* <Flex
             flexDirection='column'
             justifyContent='center'
             alignItems='start'
@@ -233,7 +270,7 @@ function SignIn() {
                 </Text>
               </NavLink>
             </Text>
-          </Flex>
+          </Flex> */}
         </Flex>
       </Flex>
     </DefaultAuth>
