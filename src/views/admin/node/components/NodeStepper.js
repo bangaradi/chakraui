@@ -135,7 +135,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
         account: false,
         address: false
     });
-
+    const [start, setStart] = useState(false)
     const [checkboxes, setCheckboxes] = useState({
         design: false,
         code: false,
@@ -177,6 +177,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
     const { isOpen: isOpenReq, onOpen: onOpenReq, onClose: onCloseReq } = useDisclosure()
     const { isOpen: isOpenUp, onOpen: onOpenUp, onClose: onCloseUp } = useDisclosure()
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen: isOpenStart, onOpen: onOpenStart, onClose: onCloseStart } = useDisclosure()
     const { isOpen: isOpenSelect, onOpen: onOpenSelect, onClose: onCloseSelect } = useDisclosure()
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: 'framework',
@@ -407,6 +408,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                     onClick={() => {
                                                         setOverlay(<OverlayOne />)
                                                         onOpenUp()
+                                                        
                                                     }}
                                                 >
                                                     {/* <Icon
@@ -453,7 +455,9 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                             {/* <Text>Custom backdrop filters!</Text> */}
                                                         </ModalBody>
                                                         <ModalFooter>
-                                                            <Button onClick={onCloseUp}>Upload</Button>
+                                                            <Button onClick={() => {
+                                                                onCloseUp()
+                                                            }}>Upload</Button>
                                                         </ModalFooter>
                                                     </ModalContent>
                                                 </Modal>
@@ -523,7 +527,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                             w="100%"
                                             mb="24px"
                                         >
-                                            <Box
+                                            {/* <Box
                                                 position="relative"
                                                 minW={{ sm: "110px", xl: "150px" }}
                                                 h={{ sm: "110px", xl: "150px" }}
@@ -531,7 +535,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                 mb={{ sm: "25px" }}
                                             >
                                                 <Avatar w="100%" h="100%" borderRadius="12px" />
-                                            </Box>
+                                            </Box> */}
                                             <Stack direction="column" spacing="20px" w="100%">
                                                 <FormControl>
                                                     <FormLabel
@@ -659,7 +663,8 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                         w="150px" h="150px"
                                                         onClick={() => {
                                                             setOverlay(<OverlayOne />)
-                                                            onOpenUp()
+                                                            // onOpenUp();
+                                                            if(setStart) onCloseAdd();
                                                         }}
                                                     >
                                                         {/* <Icon
@@ -742,18 +747,21 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                     PREV
                                                 </Text>
                                             </Button>
-                                            <Button
+                                            {/* <Button
                                                 variant="no-hover"
                                                 bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
                                                 alignSelf="flex-end"
                                                 mt="24px"
                                                 w={{ sm: "75px", lg: "100px" }}
                                                 h="35px"
+                                                onClick={() => {
+                                                    onCloseAdd();
+                                                }}
                                             >
                                                 <Text fontSize="xs" color="#fff" fontWeight="bold">
                                                     SEND
                                                 </Text>
-                                            </Button>
+                                            </Button> */}
                                         </Flex>
                                     </Flex>
                                 </Box>
