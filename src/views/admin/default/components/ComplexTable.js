@@ -10,6 +10,7 @@ import {
   Thead,
   Tr,
   useColorModeValue,
+  Button,
 } from "@chakra-ui/react";
 import React, { useMemo, useState, useEffect } from "react";
 import {
@@ -143,16 +144,21 @@ export default function ColumnsTable(props) {
                         {cell.value}
                       </Text>
                     );
-                  } else if (cell.column.Header === "PROGRESS") {
+                  } else if (cell.column.Header === "ACTION") {
                     data = (
                       <Flex align='center'>
-                        <Progress
+                        {/* <Progress
                           variant='table'
                           colorScheme='brandScheme'
                           h='8px'
                           w='108px'
                           value={cell.value}
-                        />
+                        /> */}
+                        <Button onClick={() => {
+                          console.log(cell.value);
+                        }
+                        }>START</Button>
+                        
                       </Flex>
                     );
                   }

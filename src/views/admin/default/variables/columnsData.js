@@ -30,7 +30,7 @@ export const columnsDataComplex = [
     accessor: "date",
   },
   {
-    Header: "PROGRESS",
+    Header: "ACTION",
     accessor: "progress",
   },
 ];

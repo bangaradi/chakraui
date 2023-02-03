@@ -187,7 +187,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
     const [projectName, setProjectName] = useState("");
     const [date, setDate] = useState("");
     function getDate() {
-        var today = new Date().toLocaleString();
+        var today = new Date().toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" });
         setDate(today);
 
     }
@@ -676,10 +676,11 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                         <Modal isCentered isOpen={isOpenReq} onClose={onCloseReq}>
                                                             {overlay}
                                                             <ModalContent>
-                                                                <ModalHeader>Setup Requirements</ModalHeader>
+                                                                <ModalHeader>Upload Setup Requirements</ModalHeader>
                                                                 <ModalCloseButton />
+                                                                {/* <Text>Upload Requirements</Text> */}
                                                                 <ModalBody>
-                                                                    <Flex justifyContent="center">
+                                                                    {/* <Flex justifyContent="center">
                                                                         <Link to="/files/myfile.pdf" target="_blank" download>
                                                                             <Button leftIcon={<DownloadIcon />} colorScheme='blackAlpha' variant='solid' cursor="pointer"
                                                                                 bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
@@ -689,7 +690,16 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                                                 Download Requirements
                                                                             </Button>
                                                                         </Link>
-                                                                    </Flex>
+                                                                    </Flex> */}
+                                                                    <Input
+                                                                        placeholder="Select Date and Time"
+                                                                        size="md"
+                                                                        type="file"
+                                                                        onChange={(file) => {
+                                                                            handleFile(file)
+                                                                        }
+                                                                        }
+                                                                    />
                                                                     {/* <Select
                                     cursor="pointer"
                                     bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
@@ -1215,6 +1225,9 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                     var data = [];
                                                     data = projectData;
                                                     data.push({ name: projectName, status: "In progress", date: date, progress: 0 });
+                                                    setProjectData(data);
+                                                    sessionStorage.setItem("pdata", JSON.stringify(data));
+                                                    window.location.reload();
                                                     console.log(projectData);
 
                                                 }}

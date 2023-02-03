@@ -118,7 +118,11 @@ export default function UserReports() {
   // Chakra Color Mode
   useEffect(() => {
     setTableData(projectData);
-    console.log(tableData);
+    var data;
+    data = sessionStorage.getItem("pdata");
+    if (data === null) return;
+    console.log(data);
+    setTableData(JSON.parse(data));
   }, [projectData, setTableData]);
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
@@ -209,7 +213,7 @@ export default function UserReports() {
           value='2935'
         />
       </SimpleGrid>
-      <TableContainer>
+      {/* <TableContainer>
         <Table variant='simple'>
           <Thead>
             <Tr>
@@ -227,7 +231,7 @@ export default function UserReports() {
             </Tr>
           </Tbody>
         </Table>
-      </TableContainer>
+      </TableContainer> */}
 
       {/* <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px' mb='20px'>
         <TotalSpent />
@@ -240,11 +244,11 @@ export default function UserReports() {
           <PieCard />
         </SimpleGrid>
       </SimpleGrid> */}
-      {/* <SimpleGrid columns={{ base: 1, md: 1, xl: 1 }} gap='20px' mb='20px'>
+      <SimpleGrid columns={{ base: 1, md: 1, xl: 1 }} gap='20px' mb='20px'>
         <ComplexTable
           columnsData={columnsDataComplex}
           tableData={tableData}
-        /> */}
+        />
         {/* <Text>{tableData[2].name}</Text> */}
         {/* <Text>{projectData[1].name}</Text>
         <Text>{projectData[2].name}</Text> */}
@@ -252,7 +256,7 @@ export default function UserReports() {
           <Tasks />
           <MiniCalendar h='100%' minW='100%' selectRange={false} />
         </SimpleGrid> */}
-      {/* </SimpleGrid> */}
+      </SimpleGrid>
       {/* <Text>{tableData[2].name}</Text> */}
 
       {/* <Text>
