@@ -185,7 +185,7 @@ export default function NodeDashboard(params) {
         let found = -1;
         // start_time = new Date().getTime();
         // found = implementSearch(str, checkHash);
-        console.log("finding hash: ", checkHash, " in string: ", data);
+        console.log("finding hash: ", checkHash, " in string: ", data.length);
         found = implementSearch(data, checkHash)
         // end_time = new Date().getTime();
         // console.log("time taken: ", end_time - start_time);
@@ -324,7 +324,7 @@ export default function NodeDashboard(params) {
           <ModalCloseButton />
           <ModalHeader>Get Project</ModalHeader>
           <ModalBody>
-            <NodeStepper onCloseAdd={onCloseAdd} />
+            <NodeStepper onCloseAdd={onCloseAdd} joinNode={joinNode}/>
           </ModalBody>
         </ModalContent>
       </Modal>

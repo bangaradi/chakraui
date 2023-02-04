@@ -128,14 +128,25 @@ export default function UserReports() {
   // }, [projectData, setTableData]);
   useEffect(() => {
     socket.emit("join provider", socket.id);
+
+    socket.on("found", function(data){
+      console.log("inside found");
+      console.log("found", data);
+    });
+
+    return () => {
+      socket.off('connect');
+      socket.off('disconnect');
+      socket.off('pong');
+    };
   },[]);
   // const joinProvider = () => {
     // socket.emit("join provider", socket.id);
   // };
-  const startProject = async () => {
-    await socket.emit("split data", string);
-    console.log(string);
-    console.log("start project");
+  const startProject = () => {
+    socket.emit("split data", string);
+    // console.log(string);
+    console.log("start project", string);
   };
 
   const brandColor = useColorModeValue("brand.500", "white");

@@ -23,7 +23,7 @@ import SignInCentered from "views/auth/signIn";
 
 const routes = [
   {
-    name: "Manager Dashboard",
+    name: "Provider Dashboard",
     layout: "/admin",
     path: "/default",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
@@ -36,13 +36,13 @@ const routes = [
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: NodeDashboard,
   },
-  {
-    name: "Add Project",
-    layout: "/admin",
-    path: "/addproject",
-    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-    component: ProjectDashboard,
-  },
+  // {
+  //   name: "Add Project",
+  //   layout: "/admin",
+  //   path: "/addproject",
+  //   icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+  //   component: ProjectDashboard,
+  // },
   
   // {
   //   name: "NFT Marketplace",

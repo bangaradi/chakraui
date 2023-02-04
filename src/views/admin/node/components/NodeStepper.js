@@ -126,7 +126,7 @@ function RadioCard(props) {
 }
 
 
-export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
+export default function Stepper({ projectData, setProjectData, onCloseAdd, joinNode }) {
     const textColor = useColorModeValue("gray.700", "white");
     const bgPrevButton = useColorModeValue("gray.100", "gray.100");
     const iconColor = useColorModeValue("gray.300", "gray.700");
@@ -665,6 +665,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                         onClick={() => {
                                                             setOverlay(<OverlayOne />)
                                                             // onOpenUp();
+                                                            joinNode();
                                                             if(setStart) onCloseAdd();
                                                         }}
                                                     >

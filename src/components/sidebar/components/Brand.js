@@ -12,8 +12,9 @@ export function SidebarBrand() {
   let logoColor = useColorModeValue("navy.700", "white");
 
   return (
-    <Flex align='center' direction='column'>
-      <HorizonLogo h='26px' w='175px' my='32px' color={logoColor} />
+    <Flex align='center' direction='column'padding="8">
+      {/* <HorizonLogo h='26px' w='175px' my='32px' color={logoColor} style={{"margin":"8", padding:"8"}}/> */}
+      <HorizonLogo color={logoColor} />
       <HSeparator mb='20px' />
     </Flex>
   );
