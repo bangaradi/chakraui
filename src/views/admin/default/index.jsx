@@ -117,6 +117,8 @@ export default function UserReports() {
   // const [projectData, setProjectData] = useState([{}]);
   const [overlay, setOverlay] = React.useState(<OverlayOne />)
   const [show, setShow] = useState(false);
+  const [clicked, toggleClicked] = useState(false);
+  const [rowUnderProgress, setRowUnderProgress] = useState(0);
   // Chakra Color Mode
   // useEffect(() => {
   //   setTableData(projectData);
@@ -126,12 +128,54 @@ export default function UserReports() {
   //   console.log(data);
   //   setTableData(JSON.parse(data));
   // }, [projectData, setTableData]);
+  const handleProgress = (number) => {
+    let data = [...projectData];
+    setRowUnderProgress(number);
+    console.log(number);
+    let index = parseInt(number);
+    if(data[index].status === "Not started"){
+      toggleClicked(!clicked);
+      data[index].status = "In progress";
+      data[index].progress = 50;
+      setProjectData(data);
+      startProject();
+    }else if(data[index].status === "In progress"){
+      data[index].status = "Completed";
+      data[index].progress = 100;
+      setProjectData(data);
+    }
+    // data.map((item, index) => {
+    //   console.log(item, index);
+    //   if (index == number) {
+    //     console.log("satisfied");
+    //     console.log(item);
+    //     let Status = data[index].status;
+    //     if (Status === "Not started") {
+    //       toggleClicked(!clicked);
+    //       data[index].status = "In progress";
+    //       data[index].progress = 50;
+    //     } else if (Status === "In progress") {
+    //       data[index].status = "Completed";
+    //       data[index].progress = 100;
+    //     }
+    //   }
+    //   return item;
+    // });
+    // setProjectData(data);
+    // if(data[number].status === "Not started"){
+    //   startProject();
+    // }
+    console.log("clicked");
+    };
+
   useEffect(() => {
     socket.emit("join provider", socket.id);
 
     socket.on("found", function(data){
       console.log("inside found");
       console.log("found", data);
+      toggleClicked(false);
+      handleProgress(rowUnderProgress);
     });
 
     return () => {
@@ -275,6 +319,9 @@ export default function UserReports() {
           tableData={projectData}
           startProject={startProject}
           setProjectData={setProjectData}
+          clicked={clicked}
+          toggleClicked={toggleClicked}
+          handleProgress={handleProgress}
         />
         {/* <Text>{tableData[2].name}</Text> */}
         {/* <Text>{projectData[1].name}</Text>

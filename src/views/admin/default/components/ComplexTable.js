@@ -28,50 +28,12 @@ import Menu from "components/menu/MainMenu";
 import { MdCheckCircle } from "react-icons/md";
 import { BiAnalyse, BiArrowFromBottom } from "react-icons/bi";
 export default function ColumnsTable(props) {
-  const { columnsData, tableData, startProject, setProjectData } = props;
-  const [clicked, toggleClicked] = useState(false);
+  const { columnsData, tableData, startProject, setProjectData, clicked, toggleClicked, handleProgress} = props;
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
 
-  const handleProgress = (number) => {
-    let data = [...tableData];
-    console.log(number);
-    data.map((item, index) => {
-      console.log(item, index);
-      if (index == number) {
-        console.log("satisfied");
-        console.log(item);
-        let Status = data[index].status;
-        if (Status === "Not started") {
-          data[index].status = "In progress";
-          data[index].progress = 50;
-        } else if (Status === "In progress") {
-          data[index].status = "Completed";
-          data[index].progress = 100;
-        }
-      }
-      return item;
-    });
-    setProjectData(data);
-    // toggleClicked(!clicked);
-    // let data = [...tableData]
-    // data.map((item, index) =>{
-    //   if(index === number){
-    //     let Status = data[index].status;
-    //     if(Status === "Not started"){
-    //       data[index].status = "In progress";
-    //       data[index].progress = 50;
-    //     }else if(Status === "In progress"){
-    //       data[index].status = "Completed";
-    //       data[index].progress = 100;
-    //     }
-    //   }
-    //   return item;
-    // });
-    // setProjectData(data);
-    // startProject();
-    console.log("clicked");
-    };
+
+
 
   const tableInstance = useTable(
     {
@@ -194,7 +156,7 @@ export default function ColumnsTable(props) {
                           value={cell.value}
                         /> */}
                         <Button 
-                        // isLoading={clicked}
+                        isLoading={clicked}
                         onClick={()=> {
                           handleProgress(row.id);
                           }}
