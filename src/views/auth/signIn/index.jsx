@@ -39,6 +39,19 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  // Text,
+  HStack,
+  RadioGroup,
+  Link
+} from '@chakra-ui/react'
 // Custom components
 import { HSeparator } from "components/separator/Separator";
 import DefaultAuth from "layouts/auth/Default";
@@ -46,6 +59,7 @@ import DefaultAuth from "layouts/auth/Default";
 import illustration from "assets/img/auth/auth.png";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { useDisclosure } from '@chakra-ui/react'
 import { RiEyeCloseLine } from "react-icons/ri";
 
 function SignIn() {
@@ -65,13 +79,14 @@ function SignIn() {
     { bg: "secondaryGray.300" },
     { bg: "whiteAlpha.200" }
   );
+  const { isOpen: isOpenNav, onOpen: onOpenNav, onClose: onCloseNav } = useDisclosure()
   const [show, setShow] = React.useState(false);
   const handleClick = () => {
     setShow(!show);
     router
   }
   return (
-    // <DefaultAuth illustrationBackground={illustration} image={illustration}>
+    <DefaultAuth illustrationBackground={illustration} image={illustration}>
     <DefaultAuth>
       <Flex
         maxW={{ base: "100%", md: "max-content" }}
@@ -211,9 +226,84 @@ function SignIn() {
               fontWeight='500'
               w='100%'
               h='50'
-              mb='24px'>
+              mb='24px'
+              onClick={onOpenNav}>
               Sign In
             </Button>
+            <Modal isCentered isOpen={isOpenNav} onClose={onCloseNav} size='full'>
+              <ModalContent>
+                {/* <ModalHeader>
+                  Select your Role
+                </ModalHeader> */}
+                <ModalBody>
+                  <Box paddingTop={{ xl: "130px" }}>
+                    <Flex>
+                      <Flex
+                        direction="column"
+                        align="center"
+                        justify="center"
+                        textAlign="center"
+                        w="100%"
+                      // mx="auto"
+                      >
+                        <Text
+                          color={textColor}
+                          fontSize="10vh"
+                          fontWeight="bold"
+                          mb="4px"
+                        >
+                          Select Your Role
+                        </Text>
+                        {/* <Text color="gray.400" fontWeight="normal" fontSize="sm">
+                          Please enter project details below
+                        </Text> */}
+                      </Flex>
+                    </Flex>
+                    <Flex
+
+                      // mx="auto"
+                      direction="column"
+                      minH="70vh"
+                      align="center"
+                      pt={{ sm: "125px", lg: "75px" }}
+                    >
+                      <Flex alignContent="center" w="150vh" flexDirection="row" mx="auto">
+                        <HStack>
+                          <NavLink to='/' margin="200">
+                            <Button
+                              fontSize='xl'
+                              variant='brand'
+                              fontWeight='500'
+                              w='100%'
+                              h='100'
+                              mb='100'
+                              margin="200"
+
+                              onClick={onOpenNav}>
+
+                              Provider
+                            </Button>
+                          </NavLink>
+                          <NavLink to='/admin/node' w="100%" margin="300">
+                            <Button
+                              fontSize='xl'
+                              variant='brand'
+                              fontWeight='500'
+                              w='100%'
+                              h='100'
+                              mb='100'
+                              margin="200"
+                              onClick={onOpenNav}>
+                              Node
+                            </Button>
+                          </NavLink>
+                        </HStack>
+                      </Flex>
+                    </Flex>
+                  </Box>
+                </ModalBody>
+              </ModalContent>
+            </Modal>
           </FormControl>
           <Flex
             flexDirection='column'
@@ -236,7 +326,8 @@ function SignIn() {
           </Flex>
         </Flex>
       </Flex>
-    </DefaultAuth>
+    </DefaultAuth >
+   </DefaultAuth >
   );
 }
 
