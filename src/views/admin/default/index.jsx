@@ -105,7 +105,7 @@ export default function UserReports() {
   const [tableData, setTableData] = useState([{}]);
   const [projectData, setProjectData] = useState([{
     "name": "Project 1",
-    "status": "Completed",
+    "status": "Not started",
     "date": "2 Feb 2023",
     "progress": 100,
   }, {
@@ -274,6 +274,7 @@ export default function UserReports() {
           columnsData={columnsDataComplex}
           tableData={projectData}
           startProject={startProject}
+          setProjectData={setProjectData}
         />
         {/* <Text>{tableData[2].name}</Text> */}
         {/* <Text>{projectData[1].name}</Text>
