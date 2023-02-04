@@ -41,11 +41,11 @@ export default function Auth() {
   document.documentElement.dir = "ltr";
   return (
     <Box>
-      <SidebarContext.Provider
+      {/* <SidebarContext.Provider
         value={{
           toggleSidebar,
           setToggleSidebar,
-        }}>
+        }}> */}
         <Box
           bg={authBg}
           float='right'
@@ -70,7 +70,7 @@ export default function Auth() {
             </Box>
           ) : null}
         </Box>
-      </SidebarContext.Provider>
+      {/* </SidebarContext.Provider> */}
     </Box>
   );
 }

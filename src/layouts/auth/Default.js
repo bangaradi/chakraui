@@ -29,7 +29,7 @@ function AuthIllustration(props) {
         ps={{ xl: "70px" }}
         justifyContent='start'
         direction='column'>
-        <NavLink
+        {/* <NavLink
           to='/admin'
           style={() => ({
             width: "fit-content",
@@ -51,7 +51,7 @@ function AuthIllustration(props) {
               Back to Simmmple
             </Text>
           </Flex>
-        </NavLink>
+        </NavLink> */}
         {children}
         <Box
           display={{ base: "none", md: "block" }}
@@ -62,12 +62,13 @@ function AuthIllustration(props) {
           right='0px'>
           <Flex
             bg={`url(${illustrationBackground})`}
+            bgRepeat='no-repeat'
             justify='center'
             align='end'
-            w='100%'
+            w='80%'
             h='100%'
-            bgSize='cover'
-            bgPosition='50%'
+            bgSize='contain'
+            bgPosition='100%'
             position='absolute'
             borderBottomLeftRadius={{ lg: "120px", xl: "200px" }}></Flex>
         </Box>
