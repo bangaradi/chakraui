@@ -548,8 +548,8 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                     <Input
                                                         borderRadius="15px"
                                                         placeholder="eg. Michael"
-                                                        fontSize="xs"
-                                                    />
+                                                        fontSize="xl"
+                                                        type= "time"/>
                                                 </FormControl>
                                                 <FormControl>
                                                     <FormLabel
@@ -562,7 +562,8 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                     <Input
                                                         borderRadius="15px"
                                                         placeholder="eg. Jackson"
-                                                        fontSize="xs"
+                                                        fontSize="xl"
+                                                        type= "time"
                                                     />
                                                 </FormControl>
                                                 <FormControl>
@@ -575,8 +576,8 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd }) {
                                                     </FormLabel>
                                                     <Input
                                                         borderRadius="15px"
-                                                        placeholder="eg. example@address.com"
-                                                        fontSize="xs"
+                                                        placeholder="Number of Days per Week"
+                                                        fontSize="sm"
                                                     />
                                                 </FormControl>
                                             </Stack>
