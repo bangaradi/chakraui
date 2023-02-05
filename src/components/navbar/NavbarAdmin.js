@@ -74,7 +74,7 @@ export default function AdminNavbar(props) {
       mx='auto'
       mt={secondaryMargin}
       pb='8px'
-      right={{ base: "12px", md: "30px", lg: "30px", xl: "30px" }}
+      // right={{ base: "12px", md: "30px", lg: "30px", xl: "30px" }}
       px={{
         sm: paddingX,
         md: "10px",
@@ -85,11 +85,16 @@ export default function AdminNavbar(props) {
       pt='8px'
       top={{ base: "12px", md: "16px", xl: "18px" }}
       w={{
-        base: "calc(100vw - 6%)",
-        md: "calc(100vw - 8%)",
-        lg: "calc(100vw - 6%)",
-        xl: "calc(100vw - 350px)",
-        "2xl": "calc(100vw - 365px)",
+        // base: "calc(100vw - 6%)",
+        // md: "calc(100vw - 8%)",
+        // lg: "calc(100vw - 6%)",
+        // xl: "calc(100vw - 350px)",
+        // "2xl": "calc(100vw - 365px)",
+        base: "100vw",
+        md: "100vw",
+        lg: "100vw",
+        xl: "100vw",
+        "2xl": "100vw",
       }}>
       <Flex
         w='100%'
@@ -100,7 +105,7 @@ export default function AdminNavbar(props) {
         alignItems={{ xl: "center" }}
         mb={gap}>
         <Box mb={{ sm: "8px", md: "0px" }}>
-          <Breadcrumb>
+          {/* <Breadcrumb>
             <BreadcrumbItem color={secondaryText} fontSize='sm' mb='5px'>
               <BreadcrumbLink href='#' color={secondaryText}>
                 Pages
@@ -112,7 +117,7 @@ export default function AdminNavbar(props) {
                 {brandText}
               </BreadcrumbLink>
             </BreadcrumbItem>
-          </Breadcrumb>
+          </Breadcrumb> */}
           {/* Here we create navbar brand, based on route name */}
           <Link
             color={mainText}

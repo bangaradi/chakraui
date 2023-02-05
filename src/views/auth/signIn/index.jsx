@@ -48,7 +48,7 @@ import {
   ModalBody,
   ModalCloseButton,
   // Text,
-  HStack,
+  Stack,
   RadioGroup,
   Link
 } from '@chakra-ui/react'
@@ -64,7 +64,7 @@ import { RiEyeCloseLine } from "react-icons/ri";
 
 function SignIn() {
   // Chakra color mode
-  const textColor = useColorModeValue("navy.700", "white");
+  const textColor = useColorModeValue("white", "navy.700");
   const textColorSecondary = "gray.400";
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
@@ -123,7 +123,7 @@ function SignIn() {
             mx={{ base: "auto", lg: "unset" }}
             me='auto'
             mb={{ base: "20px", md: "auto" }}>
-            <Button
+            {/* <Button
               fontSize='sm'
               me='0px'
               mb='26px'
@@ -138,12 +138,12 @@ function SignIn() {
               _focus={googleActive}>
               <Icon as={FcGoogle} w='20px' h='20px' me='10px' />
               Sign in with Google
-            </Button>
+            </Button> */}
             <Flex align='center' mb='25px'>
               <HSeparator />
-              <Text color='gray.400' mx='14px'>
+              {/* <Text color='gray.400' mx='14px'>
                 or
-              </Text>
+              </Text> */}
               <HSeparator />
             </Flex>
             <FormControl>
@@ -158,6 +158,7 @@ function SignIn() {
               </FormLabel>
               <Input
                 isRequired={true}
+                color="white"
                 variant='auth'
                 fontSize='sm'
                 ms={{ base: "0px", md: "0px" }}
@@ -178,6 +179,7 @@ function SignIn() {
               <InputGroup size='md'>
                 <Input
                   isRequired={true}
+                  color="white"
                   fontSize='sm'
                   placeholder='Min. 8 characters'
                   mb='24px'
@@ -232,9 +234,9 @@ function SignIn() {
               </Button>
               <Modal isCentered isOpen={isOpenNav} onClose={onCloseNav} size='full'>
                 <ModalContent>
-                  {/* <ModalHeader>
-                  Select your Role
-                </ModalHeader> */}
+                  <ModalHeader>
+                    {/* Select your Role */}
+                  </ModalHeader>
                   <ModalBody>
                     <Box paddingTop={{ xl: "130px" }}>
                       <Flex>
@@ -247,8 +249,8 @@ function SignIn() {
                         // mx="auto"
                         >
                           <Text
-                            color={textColor}
-                            fontSize="10vh"
+                            color={!textColor}
+                            fontSize="xl"
                             fontWeight="bold"
                             mb="4px"
                           >
@@ -260,43 +262,44 @@ function SignIn() {
                         </Flex>
                       </Flex>
                       <Flex
-
+                        border="solid 2px black"
                         // mx="auto"
                         direction="column"
-                        minH="70vh"
+                        minH="10vh"
                         align="center"
                         pt={{ sm: "125px", lg: "75px" }}
                       >
-                        <Flex alignContent="center" w="150vh" flexDirection="row" mx="auto">
-                          <HStack>
-                            <NavLink to='/admin/default' margin="200">
+                        <Flex alignContent="center" width={{ base: '100%', sm: '50%', md: '25%' }} flexDirection="row" mx="auto">
+                          <Stack border="solid 2px black" align="center" width={{ base: '100%', sm: '50%', md: '25%' }}>
+                            <NavLink to='/admin/node' w="100%" margin="10">
                               <Button
                                 fontSize='xl'
                                 variant='brand'
                                 fontWeight='500'
-                                w='100%'
-                                h='100'
-                                mb='100'
-                                margin="200"
-                              >
-
-                                Provider
-                              </Button>
-                            </NavLink>
-                            <NavLink to='/admin/node' w="100%" margin="300">
-                              <Button
-                                fontSize='xl'
-                                variant='brand'
-                                fontWeight='500'
-                                w='100%'
-                                h='100'
-                                mb='100'
-                                margin="200"
+                                width={{ base: "25%", sm: '50%', md: '100%' }}
+                                h='3rem'
+                                // mb='100'
+                                ml="200"
+                                mr="200"
                                 onClick={onOpenNav}>
                                 Node
                               </Button>
                             </NavLink>
-                          </HStack>
+                            <NavLink to='/admin/node' w="100%" margin="10">
+                              <Button
+                                fontSize='xl'
+                                variant='brand'
+                                fontWeight='500'
+                                width={{ base: '100%', sm: '50%', md: '25%' }}
+                                h='3rem'
+                                // mb='100'
+                                ml="200"
+                                mr="200"
+                                onClick={onOpenNav}>
+                                Node
+                              </Button>
+                            </NavLink>
+                          </Stack>
                         </Flex>
                       </Flex>
                     </Box>
@@ -304,7 +307,7 @@ function SignIn() {
                 </ModalContent>
               </Modal>
             </FormControl>
-            <Flex
+            {/* <Flex
               flexDirection='column'
               justifyContent='center'
               alignItems='start'
@@ -322,7 +325,7 @@ function SignIn() {
                   </Text>
                 </NavLink>
               </Text>
-            </Flex>
+            </Flex> */}
           </Flex>
         </Flex>
       </DefaultAuth >

@@ -37,7 +37,8 @@ export default function Auth() {
       }
     });
   };
-  const authBg = useColorModeValue("white", "navy.900");
+  // const authBg = useColorModeValue("white", "navy.900");
+  const authBg = "#00285d"
   document.documentElement.dir = "ltr";
   return (
     <Box>

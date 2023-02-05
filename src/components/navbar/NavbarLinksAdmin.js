@@ -72,7 +72,7 @@ export default function HeaderLinks(props) {
 					</Text>
 				</Text>
 			</Flex> */}
-			<SidebarResponsive routes={routes} />
+			{/* <SidebarResponsive routes={routes} /> */}
 			{/* <Menu>
 				<MenuButton p="0px">
 					<Icon mt="6px" as={MdNotificationsNone} color={navbarIcon} w="18px" h="18px" me="10px" />
@@ -189,7 +189,7 @@ export default function HeaderLinks(props) {
 							color="red.400"
 							borderRadius="8px"
 							px="14px">
-							<NavLink to='/auth/sign-up'>
+							<NavLink to='/admin/default'>
 								<Text fontSize="sm">Provider</Text>
 							</NavLink>
 						</MenuItem>
@@ -199,7 +199,7 @@ export default function HeaderLinks(props) {
 							color="red.400"
 							borderRadius="8px"
 							px="14px">
-							<NavLink to='/auth/sign-up'>
+							<NavLink to='/admin/node'>
 								<Text fontSize="sm">Node</Text>
 							</NavLink>
 						</MenuItem>
