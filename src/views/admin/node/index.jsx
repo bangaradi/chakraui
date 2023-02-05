@@ -119,6 +119,7 @@ export default function NodeDashboard(params) {
 
   let start_time = 0
   let end_time = 0
+  const { isOpen: isOpenFound, onOpen: onOpenFound, onClose: onCloseFound } = useDisclosure()
 
   // console.log("socket", socket.id);
   const textColor = useColorModeValue("gray.700", "white");
@@ -164,39 +165,43 @@ export default function NodeDashboard(params) {
     return -1;
   }
 
-  useEffect(()=>{
-    params.socket.on("get checkHash", async function(data){
+  useEffect(() => {
+    params.socket.on("get checkHash", async function (data) {
       // console.log("checkHash is: ",data);
       checkHash = data;
       // setCheckHash(data);
-      console.log("checkHash is: ",checkHash);
+      console.log("checkHash is: ", checkHash);
       // checkHash_l = checkHash.length;
 
     });
-    
-    params.socket.on("disconnect it", function(){
-        params.socket.disconnect();
+
+    params.socket.on("disconnect it", function () {
+      params.socket.disconnect();
     });
-    
-    params.socket.on("get data", async function(data){
-        // console.log("str is : ", data);
-        // str = data;
-        // await setNodeStr(data);
-        let found = -1;
-        // start_time = new Date().getTime();
-        // found = implementSearch(str, checkHash);
-        console.log("finding hash: ", checkHash, " in string: ", data.length);
-        found = implementSearch(data, checkHash)
-        // end_time = new Date().getTime();
-        // console.log("time taken: ", end_time - start_time);
-        if(found > -1){
-            console.log("found");
-            params.socket.emit("found", {found:found, id:params.socket.id, checkHash:checkHash});
-        }else{
-            console.log("not found");
-            params.socket.emit("found", {found:found, id:params.socket.id, checkHash:checkHash});
-        }
-    
+
+    params.socket.on("get data", async function (data) {
+      // console.log("str is : ", data);
+      // str = data;
+      // await setNodeStr(data);
+      let found = -1;
+      // start_time = new Date().getTime();
+      // found = implementSearch(str, checkHash);
+      console.log("finding hash: ", checkHash, " in string: ", data.length);
+      found = implementSearch(data, checkHash)
+      // end_time = new Date().getTime();
+      // console.log("time taken: ", end_time - start_time);
+      if (found > -1) {
+        console.log("found");
+        params.socket.emit("found", { found: found, id: params.socket.id, checkHash: checkHash });
+        setOverlay(<OverlayOne />)
+        onOpenFound()
+      } else {
+        console.log("not found");
+        params.socket.emit("found", { found: found, id: params.socket.id, checkHash: checkHash });
+        setOverlay(<OverlayOne />)
+        onOpenFound()
+      }
+
     });
 
     return () => {
@@ -204,7 +209,7 @@ export default function NodeDashboard(params) {
       params.socket.off('disconnect');
       params.socket.off('pong');
     };
-  },[]);
+  }, []);
 
   // const brandColor = useColorModeValue("brand.500", "white");
   // const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
@@ -318,14 +323,57 @@ export default function NodeDashboard(params) {
 
         Get Project
       </Button>
+      {/* <Button onClick={() => {
+        setOverlay(<OverlayOne />)
+        onOpenFound()
+      }}>
+
+        Found Demo
+      </Button> */}
       <Modal isCentered isOpen={isOpenAdd} onClose={onCloseAdd} size='full'>
         {/* {overlay} */}
         <ModalContent>
           <ModalCloseButton />
           <ModalHeader>Get Project</ModalHeader>
           <ModalBody>
-            <NodeStepper onCloseAdd={onCloseAdd} joinNode={joinNode}/>
+            <NodeStepper onCloseAdd={onCloseAdd} joinNode={joinNode} />
           </ModalBody>
+        </ModalContent>
+      </Modal>
+      <Modal isCentered isOpen={isOpenFound} onClose={onCloseFound} size="xl" >
+        {overlay}
+        <ModalContent>
+          {/* <ModalHeader>Info</ModalHeader>
+          <ModalCloseButton /> */}
+          <ModalBody>
+
+            <Flex
+              direction="column"
+              align="center"
+              justify="center"
+              textAlign="center"
+              w="80%"
+              mx="auto"
+            >
+              <Text
+                color="black"
+                fontSize="lg"
+                fontWeight="bold"
+                mb="4px"
+              >
+                Congratulations! Task is completed 🎉🎉
+              </Text>
+              {/* <Text color="gray.400" fontWeight="normal" fontSize="xl">
+                Task {infoData[infoRow].status}
+              </Text> */}
+              {/* {(infoData[infoRow].status === 'Completed') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">You have earned 40 credits from this task 🔥</Text></Flex>)}
+              {(infoData[infoRow].status === 'In progress') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">Waiting for final output ⏳</Text></Flex>)}
+              {(infoData[infoRow].status === 'Not started') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">Yet to start </Text></Flex>)} */}
+              <Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">You have earned 40 credits from this task 🔥</Text></Flex>
+
+            </Flex>
+          </ModalBody>
+          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
 

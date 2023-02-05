@@ -33,4 +33,8 @@ export const columnsDataComplex = [
     Header: "ACTION",
     accessor: "progress",
   },
+  {
+    Header: "INFO",
+    accessor: "info",
+  },
 ];
