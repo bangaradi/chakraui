@@ -8,6 +8,7 @@ import { SidebarContext } from "contexts/SidebarContext";
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "routes.js";
+import ParticlesBackground from "components/ParticlesBackground";
 // import io from "socket.io-client";
 import socket from "views/admin/socket";
 // const socket = io("http://localhost:3001");
@@ -119,6 +120,7 @@ export default function Dashboard(props) {
   const { onOpen } = useDisclosure();
   return (
     <Box>
+       
       {/* <SidebarContext.Provider
         value={{
           toggleSidebar,

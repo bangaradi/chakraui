@@ -28,7 +28,7 @@ import Menu from "components/menu/MainMenu";
 import { MdCheckCircle } from "react-icons/md";
 import { BiAnalyse, BiArrowFromBottom } from "react-icons/bi";
 export default function ColumnsTable(props) {
-  const { columnsData, tableData, startProject, setProjectData, clicked, toggleClicked, handleProgress} = props;
+  const { columnsData, tableData, startProject, setProjectData, clicked, toggleClicked, handleProgress, status, onOpenInfo, setInfoRow} = props;
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
 
@@ -119,19 +119,19 @@ export default function ColumnsTable(props) {
                             cell.value === "Completed"
                               ? "green.500"
                               : cell.value === "Not started"
-                              ? "red.500"
-                              : cell.value === "In progress"
-                              ? "orange.500"
-                              : null
+                                ? "red.500"
+                                : cell.value === "In progress"
+                                  ? "orange.500"
+                                  : null
                           }
                           as={
                             cell.value === "Completed"
                               ? MdCheckCircle
                               : cell.value === "Not started"
-                              ? BiArrowFromBottom
-                              : cell.value === "In progress"
-                              ? BiAnalyse
-                              : null
+                                ? BiArrowFromBottom
+                                : cell.value === "In progress"
+                                  ? BiAnalyse
+                                  : null
                           }
                         />
                         <Text color={textColor} fontSize='sm' fontWeight='700'>
@@ -155,13 +155,32 @@ export default function ColumnsTable(props) {
                           w='108px'
                           value={cell.value}
                         /> */}
-                        <Button 
-                        isLoading={clicked}
-                        onClick={()=> {
-                          handleProgress(row.id);
+                        <Button
+                          isLoading={clicked}
+                          onClick={() => {
+                            handleProgress(row.id);
                           }}
-                        >START</Button>
-                        
+                        >{status}</Button>
+
+                      </Flex>
+                    );
+                  } else if (cell.column.Header === "INFO") {
+                    data = (
+                      <Flex align='center'>
+                        {/* <Progress
+                          variant='table'
+                          colorScheme='brandScheme'
+                          h='8px'
+                          w='108px'
+                          value={cell.value}
+                        /> */}
+                        <Button onClick={() => {
+                          setInfoRow(row.id);
+                          onOpenInfo();
+                          
+                        }
+                        }
+                        >i</Button>
                       </Flex>
                     );
                   }

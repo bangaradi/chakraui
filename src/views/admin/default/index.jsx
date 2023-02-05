@@ -87,12 +87,14 @@ import { useDisclosure } from '@chakra-ui/react'
 import Stepper from "./components/Stepper";
 import socket from "../socket";
 
+
 export default function UserReports() {
   const { isOpen: isOpenAdd, onOpen: onOpenAdd, onClose: onCloseAdd } = useDisclosure()
+  const { isOpen: isOpenInfo, onOpen: onOpenInfo, onClose: onCloseInfo } = useDisclosure()
   const OverlayOne = () => (
     <ModalOverlay
-      bg='whiteAlpha.900'
-    // backdropFilter='blur(10px) hue-rotate(90deg)'
+      // bg='whiteAlpha.900'
+      backdropFilter='blur(10px) hue-rotate(90deg)'
     />
   )
   // const [tableData, setTableData] = useState([{
@@ -102,6 +104,7 @@ export default function UserReports() {
   //   "progress": 0  
   // },]);
   const [string, setString] = useState("");
+  const [credits, setCredits] = useState(500);
   const [tableData, setTableData] = useState([{}]);
   const [projectData, setProjectData] = useState([{
     "name": "Project 1",
@@ -119,6 +122,9 @@ export default function UserReports() {
   const [show, setShow] = useState(false);
   const [clicked, toggleClicked] = useState(false);
   const [rowUnderProgress, setRowUnderProgress] = useState(0);
+  const [status, setStatus] = useState("Start");
+  const [infoRow, setInfoRow] = useState(0);
+  // const [overlay, setOverlay] = React.useState(<OverlayOne />)
   // Chakra Color Mode
   // useEffect(() => {
   //   setTableData(projectData);
@@ -128,20 +134,25 @@ export default function UserReports() {
   //   console.log(data);
   //   setTableData(JSON.parse(data));
   // }, [projectData, setTableData]);
+  const handleInfo = (number) => {
+    let infoData = [...projectData];
+  }
   const handleProgress = (number) => {
     let data = [...projectData];
     setRowUnderProgress(number);
     console.log(number);
     let index = parseInt(number);
-    if(data[index].status === "Not started"){
+    if (data[index].status === "Not started") {
       toggleClicked(!clicked);
       data[index].status = "In progress";
       data[index].progress = 50;
       setProjectData(data);
       startProject();
-    }else if(data[index].status === "In progress"){
+    } else if (data[index].status === "In progress") {
       data[index].status = "Completed";
       data[index].progress = 100;
+      setStatus = "Completed";
+      setCredits(credits + 40);
       setProjectData(data);
     }
     // data.map((item, index) => {
@@ -166,12 +177,12 @@ export default function UserReports() {
     //   startProject();
     // }
     console.log("clicked");
-    };
+  };
 
   useEffect(() => {
     socket.emit("join provider", socket.id);
 
-    socket.on("found", function(data){
+    socket.on("found", function (data) {
       console.log("inside found");
       console.log("found", data);
       toggleClicked(false);
@@ -183,16 +194,16 @@ export default function UserReports() {
       socket.off('disconnect');
       socket.off('pong');
     };
-  },[]);
+  }, []);
   // const joinProvider = () => {
-    // socket.emit("join provider", socket.id);
+  // socket.emit("join provider", socket.id);
   // };
   const startProject = () => {
     socket.emit("split data", string);
     // console.log(string);
     console.log("start project", string);
   };
-
+  var infoData = [...projectData];
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
   return (
@@ -230,7 +241,7 @@ export default function UserReports() {
           value='$642.39'
         />
         {/* sales */}
-        <MiniStatistics growth='+23%' name='Sales' value='$574.34' />
+        <MiniStatistics growth='+23%' name='Credits' value={credits} />
         {/* balance */}
         <MiniStatistics
           endContent={
@@ -254,7 +265,7 @@ export default function UserReports() {
           value='$1,000'
         />
         {/* new taskts */}
-        <MiniStatistics
+        {/* <MiniStatistics
           startContent={
             <IconBox
               w='56px'
@@ -265,7 +276,7 @@ export default function UserReports() {
           }
           name='New Tasks'
           value='154'
-        />
+        /> */}
         {/* total projects */}
         <MiniStatistics
           startContent={
@@ -279,7 +290,7 @@ export default function UserReports() {
             />
           }
           name='Total Projects'
-          value='2935'
+          value={projectData.length}
         />
       </SimpleGrid>
       {/* <TableContainer>
@@ -322,6 +333,9 @@ export default function UserReports() {
           clicked={clicked}
           toggleClicked={toggleClicked}
           handleProgress={handleProgress}
+          status={status}
+          onOpenInfo={onOpenInfo}
+          setInfoRow={setInfoRow}
         />
         {/* <Text>{tableData[2].name}</Text> */}
         {/* <Text>{projectData[1].name}</Text>
@@ -350,7 +364,7 @@ export default function UserReports() {
           <ModalCloseButton />
           <ModalHeader>Add Project</ModalHeader>
           <ModalBody>
-            <Stepper projectData={projectData} setProjectData={setProjectData} onCloseAdd={onCloseAdd} setString={setString}/>         
+            <Stepper projectData={projectData} setProjectData={setProjectData} onCloseAdd={onCloseAdd} setString={setString} />
             {/* <Input
                                 placeholder="Select Date and Time"
                                 size="md"
@@ -378,6 +392,45 @@ export default function UserReports() {
           {/* </ModalFooter> */}
         </ModalContent>
       </Modal>
+      <Modal isCentered isOpen={isOpenInfo} onClose={onCloseInfo} size="xl" >
+        {overlay}
+        <ModalContent>
+          <ModalHeader></ModalHeader>
+          {/*<ModalCloseButton /> */}
+          <ModalBody>
+            {
+              handleInfo(infoRow)
+            }
+            <Flex
+              direction="column"
+              align="center"
+              justify="center"
+              textAlign="center"
+              w="80%"
+              mx="auto"
+            >
+              <Text
+                color="black"
+                fontSize="lg"
+                fontWeight="bold"
+                mb="4px"
+              >
+                {infoData[infoRow].name}
+              </Text>
+              <Text color="gray.400" fontWeight="normal" fontSize="xl">
+                Task {infoData[infoRow].status}
+              </Text>
+              {(infoData[infoRow].status === 'Completed') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">You have earned 40 credits from this task 🔥</Text></Flex>)}
+              {(infoData[infoRow].status === 'In progress') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">Waiting for final output ⏳</Text></Flex>)}
+              {(infoData[infoRow].status === 'Not started') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">Yet to start </Text></Flex>)}
+
+
+            </Flex>
+          </ModalBody>
+          <ModalFooter></ModalFooter>
+        </ModalContent>
+      </Modal>
+
     </Box >
   );
 }
