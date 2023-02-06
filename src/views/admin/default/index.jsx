@@ -111,18 +111,13 @@ export default function UserReports() {
     "status": "Not started",
     "date": "2 Feb 2023",
     "progress": 100,
-  }, {
-    "name": "Project 2",
-    "status": "Completed",
-    "date": "10 Feb 2023",
-    "progress": 100,
   }]);
   // const [projectData, setProjectData] = useState([{}]);
   const [overlay, setOverlay] = React.useState(<OverlayOne />)
   const [show, setShow] = useState(false);
   const [clicked, toggleClicked] = useState(false);
   const [rowUnderProgress, setRowUnderProgress] = useState(0);
-  const [status, setStatus] = useState("Start");
+  // const [status, setStatus] = useState([]);
   const [infoRow, setInfoRow] = useState(0);
   // const [overlay, setOverlay] = React.useState(<OverlayOne />)
   // Chakra Color Mode
@@ -138,6 +133,7 @@ export default function UserReports() {
     let infoData = [...projectData];
   }
   const handleProgress = (number) => {
+    console.log("handle progress", "row number: ", number);
     let data = [...projectData];
     setRowUnderProgress(number);
     console.log(number);
@@ -151,7 +147,7 @@ export default function UserReports() {
     } else if (data[index].status === "In progress") {
       data[index].status = "Completed";
       data[index].progress = 100;
-      setStatus = "Completed";
+      // setStatus("Completed");
       setCredits(credits + 40);
       setProjectData(data);
     }
@@ -180,7 +176,7 @@ export default function UserReports() {
   };
 
   useEffect(() => {
-    socket.emit("join provider", socket.id);
+    // socket.emit("join provider", socket.id);
 
     socket.on("found", function (data) {
       console.log("inside found");
@@ -203,6 +199,9 @@ export default function UserReports() {
     // console.log(string);
     console.log("start project", string);
   };
+  const connectProvider = () => {
+    socket.emit("join provider", socket.id);
+  };
   var infoData = [...projectData];
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
@@ -212,7 +211,7 @@ export default function UserReports() {
         columns={{ base: 1, md: 2, lg: 3, "2xl": 6 }}
         gap='20px'
         mb='20px'>
-        <MiniStatistics
+        {/* <MiniStatistics
           startContent={
             <IconBox
               w='56px'
@@ -225,8 +224,8 @@ export default function UserReports() {
           }
           name='Earnings'
           value='$350.4'
-        />
-        <MiniStatistics
+        /> */}
+        {/* <MiniStatistics
           startContent={
             <IconBox
               w='56px'
@@ -239,30 +238,30 @@ export default function UserReports() {
           }
           name='Spend this month'
           value='$642.39'
-        />
+        /> */}
         {/* sales */}
-        <MiniStatistics growth='+23%' name='Credits' value={credits} />
+        <MiniStatistics name='Hive Credits' value={credits} />
         {/* balance */}
         <MiniStatistics
-          endContent={
-            <Flex me='-16px' mt='10px'>
-              <FormLabel htmlFor='balance'>
-                <Avatar src={Usa} />
-              </FormLabel>
-              <Select
-                id='balance'
-                variant='mini'
-                mt='5px'
-                me='0px'
-                defaultValue='usd'>
-                <option value='usd'>USD</option>
-                <option value='eur'>EUR</option>
-                <option value='gba'>GBA</option>
-              </Select>
-            </Flex>
-          }
-          name='Your balance'
-          value='$1,000'
+          // endContent={
+          //   <Flex me='-16px' mt='10px'>
+          //     <FormLabel htmlFor='balance'>
+          //       <Avatar src={Usa} />
+          //     </FormLabel>
+          //     <Select
+          //       id='balance'
+          //       variant='mini'
+          //       mt='5px'
+          //       me='0px'
+          //       defaultValue='usd'>
+          //       <option value='usd'>USD</option>
+          //       <option value='eur'>EUR</option>
+          //       <option value='gba'>GBA</option>
+          //     </Select>
+          //   </Flex>
+          // }
+          name='Hive Flops'
+          value='250'
         />
         {/* new taskts */}
         {/* <MiniStatistics
@@ -333,7 +332,7 @@ export default function UserReports() {
           clicked={clicked}
           toggleClicked={toggleClicked}
           handleProgress={handleProgress}
-          status={status}
+          // status={status}
           onOpenInfo={onOpenInfo}
           setInfoRow={setInfoRow}
         />
@@ -358,6 +357,7 @@ export default function UserReports() {
 
         Add Project
       </Button>
+      <Button onClick={connectProvider}>Connect</Button>
       <Modal isCentered isOpen={isOpenAdd} onClose={onCloseAdd} size='full'>
         {/* {overlay} */}
         <ModalContent>

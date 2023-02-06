@@ -260,7 +260,7 @@ export default function NodeDashboard(params) {
         columns={{ base: 1, md: 2, lg: 3, "2xl": 6 }}
         gap='20px'
         mb='20px'>
-        <MiniStatistics
+        {/* <MiniStatistics
           startContent={
             <IconBox
               w='56px'
@@ -273,8 +273,8 @@ export default function NodeDashboard(params) {
           }
           name='Earnings'
           value='$350.4'
-        />
-        <MiniStatistics
+        /> */}
+        {/* <MiniStatistics
           startContent={
             <IconBox
               w='56px'
@@ -287,23 +287,23 @@ export default function NodeDashboard(params) {
           }
           name='Spend this month'
           value='$642.39'
-        />
-        <MiniStatistics growth='+23%' name='Sales' value='$574.34' />
+        /> */}
+        <MiniStatistics name='Hive Credits' value='450' />
         <MiniStatistics
-          endContent={
-            <Select
-              id='balance'
-              variant='mini'
-              mt='5px'
-              me='0px'
-              defaultValue='usd'>
-              <option value='usd'>USD</option>
-              <option value='eur'>EUR</option>
-              <option value='gba'>GBA</option>
-            </Select>
-          }
-          name='Your balance'
-          value='$1,000'
+          // endContent={
+          //   <Select
+          //     id='balance'
+          //     variant='mini'
+          //     mt='5px'
+          //     me='0px'
+          //     defaultValue='usd'>
+          //     <option value='usd'>USD</option>
+          //     <option value='eur'>EUR</option>
+          //     <option value='gba'>GBA</option>
+          //   </Select>
+          // }
+          name='Hive Flops'
+          value='20'
         />
       </SimpleGrid>
       <SimpleGrid columns={{ base: 1, md: 1, xl: 1 }} gap='20px' mb='20px'>
