@@ -127,6 +127,7 @@ export default function Dashboard(props) {
           setToggleSidebar,
         }}>
         <Sidebar routes={routes} display='none' {...rest} /> */}
+        <ParticlesBackground />
       <Box
         float='center'
         minHeight='100vh'

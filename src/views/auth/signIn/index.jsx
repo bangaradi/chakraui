@@ -250,7 +250,7 @@ function SignIn() {
                         >
                           <Text
                             color={!textColor}
-                            fontSize="xl"
+                            fontSize={{ sm: "xl", md: "100" }}
                             fontWeight="bold"
                             mb="4px"
                           >
@@ -262,7 +262,6 @@ function SignIn() {
                         </Flex>
                       </Flex>
                       <Flex
-                        border="solid 2px black"
                         // mx="auto"
                         direction="column"
                         minH="10vh"
@@ -270,7 +269,7 @@ function SignIn() {
                         pt={{ sm: "125px", lg: "75px" }}
                       >
                         <Flex alignContent="center" width={{ base: '100%', sm: '50%', md: '25%' }} flexDirection="row" mx="auto">
-                          <Stack border="solid 2px black" align="center" width={{ base: '100%', sm: '50%', md: '25%' }}>
+                          <Stack align="left" direction={{ sm: "column", md: "row" }}>
                             <NavLink to='/admin/node' w="100%" margin="10">
                               <Button
                                 fontSize='xl'
@@ -279,10 +278,10 @@ function SignIn() {
                                 width={{ base: "25%", sm: '50%', md: '100%' }}
                                 h='3rem'
                                 // mb='100'
-                                ml="200"
-                                mr="200"
+                                mr={{ md: "100" }}
+                                // mr={{ md: "200" }}
                                 onClick={onOpenNav}>
-                                Node
+                                Provider
                               </Button>
                             </NavLink>
                             <NavLink to='/admin/node' w="100%" margin="10">
@@ -290,11 +289,11 @@ function SignIn() {
                                 fontSize='xl'
                                 variant='brand'
                                 fontWeight='500'
-                                width={{ base: '100%', sm: '50%', md: '25%' }}
+                                width={{ base: "25%", sm: '50%', md: '100%' }}
                                 h='3rem'
                                 // mb='100'
-                                ml="200"
-                                mr="200"
+                                mr={{ md: "100" }}
+                                // mr="50"
                                 onClick={onOpenNav}>
                                 Node
                               </Button>
