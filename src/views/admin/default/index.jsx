@@ -149,7 +149,7 @@ export default function UserReports() {
       data[index].status = "Completed";
       data[index].progress = 100;
       // setStatus("Completed");
-      setCredits(credits + 40);
+      setCredits(credits - 40);
       setProjectData(data);
     }
     // data.map((item, index) => {
@@ -275,7 +275,7 @@ export default function UserReports() {
           //   />
           // }
           name='Nodes Connected'
-          value= {activeNodes}
+          value={activeNodes}
         />
         {/* total projects */}
         <MiniStatistics
@@ -421,7 +421,7 @@ export default function UserReports() {
               <Text color="gray.400" fontWeight="normal" fontSize="xl">
                 Task {infoData[infoRow].status}
               </Text>
-              {(infoData[infoRow].status === 'Completed') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl"> 40 credits debited 🔥</Text></Flex>)}
+              {(infoData[infoRow].status === 'Completed') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl"> 40 credits debited </Text></Flex>)}
               {(infoData[infoRow].status === 'In progress') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">Waiting for final output ⏳</Text></Flex>)}
               {(infoData[infoRow].status === 'Not started') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">Yet to start </Text></Flex>)}
 

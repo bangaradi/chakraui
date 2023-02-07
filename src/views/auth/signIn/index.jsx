@@ -163,7 +163,7 @@ function SignIn() {
                 fontSize='sm'
                 ms={{ base: "0px", md: "0px" }}
                 type='email'
-                placeholder='mail@simmmple.com'
+                placeholder='mail@domain.com'
                 mb='24px'
                 fontWeight='500'
                 size='lg'
@@ -270,7 +270,7 @@ function SignIn() {
                       >
                         <Flex alignContent="center" width={{ base: '100%', sm: '50%', md: '25%' }} flexDirection="row" mx="auto">
                           <Stack align="left" direction={{ sm: "column", md: "row" }}>
-                            <NavLink to='/admin/node' w="100%" margin="10">
+                            <NavLink to='/admin/default' w="100%" margin="10">
                               <Button
                                 fontSize='xl'
                                 variant='brand'
