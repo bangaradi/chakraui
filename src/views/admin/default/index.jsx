@@ -372,7 +372,7 @@ export default function UserReports() {
         // bg={checkboxes.design ? "teal.300" : "#fff"}
         _hover={{ opacity: "0.8" }}
       >
-        <Button w="300px" h="50px" border="1px solid lightgray" bg={connectionState ? "lightgreen" : "lightgray"} onClick={() => {
+        <Button w="300px" h="50px" border="1px solid lightgray" bg={connectionState ? "red.300" : "lightgray"} onClick={() => {
           connectProvider();
           setConnectionState(true);
 
