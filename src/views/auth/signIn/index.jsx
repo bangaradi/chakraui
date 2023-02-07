@@ -287,7 +287,7 @@ function SignIn() {
                                   // bg={checkboxes.design ? "teal.300" : "#fff"}
                                   _hover={{ opacity: "0.8" }}
                                 >
-                                    <NavLink to='/admin/node' w="100%">
+                                    {/* <NavLink to='/admin/node' w="100%"> */}
                                   <Button
                                     variant="no-hover"
                                     bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
@@ -316,7 +316,7 @@ function SignIn() {
                                     </Flex>
 
                                   </Button>
-                                  </NavLink>
+                                  {/* </NavLink> */}
                                 </Flex>
                               </Flex>
                               <Flex direction="column" align="center">
@@ -333,7 +333,6 @@ function SignIn() {
                                   // bg={checkboxes.design ? "teal.300" : "#fff"}
                                   _hover={{ opacity: "0.8" }}
                                 >
-                                  <NavLink to='/admin/node' w="100%">
                                     <Button
                                       variant="no-hover"
                                       bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
@@ -343,11 +342,12 @@ function SignIn() {
                                       // h="300px"
                                       w="300px" h="125px"
                                     // onClick={() => {
-                                    //   setOverlay(<OverlayOne />)
+                                      //   setOverlay(<OverlayOne />)
                                     //   onOpenSelect()
                                     // }}
                                     >
                                       <Flex direction="column">
+                                      <NavLink to='/admin/node' w="100%">
 
                                         <Text
                                           color="gray.400"
@@ -358,9 +358,9 @@ function SignIn() {
                                           Node
                                         </Text>
 
+                                  </NavLink>
                                       </Flex>
                                     </Button>
-                                  </NavLink>
                                 </Flex>
                               </Flex>
                             </Stack>
