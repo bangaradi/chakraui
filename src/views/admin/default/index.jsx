@@ -198,8 +198,8 @@ export default function UserReports() {
       handleProgress(rowUnderProgress);
     });
 
-    socket.on("node data", function(data){
-      console.log("node data", data);
+    socket.on("nodedata", function(data){
+      console.log("nodedata", data);
       setNodesData([...nodesData, data]);
     })
 
