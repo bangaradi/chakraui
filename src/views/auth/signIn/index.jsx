@@ -236,71 +236,199 @@ function SignIn() {
                 <ModalContent>
                   <ModalHeader>
                     {/* Select your Role */}
+                    <ModalCloseButton />
                   </ModalHeader>
                   <ModalBody>
-                    <Box paddingTop={{ xl: "130px" }}>
-                      <Flex>
-                        <Flex
-                          direction="column"
-                          align="center"
-                          justify="center"
-                          textAlign="center"
-                          w="100%"
-                        // mx="auto"
-                        >
-                          <Text
-                            color={!textColor}
-                            fontSize={{ sm: "xl", md: "100" }}
-                            fontWeight="bold"
-                            mb="4px"
+                    <Box mx="auto" alignItems="center" my="auto" display="flex" justifyContent="center">
+                      <Box>
+                        <Flex mt="100px">
+                          <Flex
+                            direction="column"
+                            align="center"
+                            justify="center"
+                            textAlign="center"
+                            w="100%"
+                            mx="auto"
                           >
-                            Select Your Role
-                          </Text>
-                          {/* <Text color="gray.400" fontWeight="normal" fontSize="sm">
+                            <Text
+                              color="black"
+                              fontSize={{ sm: "80", md: "100" }}
+                              fontWeight="bold"
+                              mb="4px"
+                            >
+                              Select Your Role
+                            </Text>
+                            {/* <Text color="gray.400" fontWeight="normal" fontSize="sm">
+                              One thing I love about the later sunsets is the chance to go
+                              for a walk through the neighborhood woods before dinner
+                            </Text> */}
+                          </Flex>
+                        </Flex>
+                        <Box>
+                          <Flex direction="column" w="100%" mt="100px">
+                            <Stack
+                              direction={{ sm: "column", md: "row" }}
+                              spacing={{ sm: "20px", lg: "35px" }}
+                              alignSelf="center"
+                              justifySelf="center"
+                              mb="24px"
+                            >
+                              <Flex direction="column" align="center">
+                                <Flex
+                                  w="300px"
+                                  h="125px"
+                                  borderRadius="12px"
+                                  justify="center"
+                                  transition=".5s all ease"
+                                  border="1px solid lightgray"
+                                  align="center"
+                                  // bg={"linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"}
+                                  // bg='tea.100'
+                                  // bg={checkboxes.design ? "teal.300" : "#fff"}
+                                  _hover={{ opacity: "0.8" }}
+                                >
+                                  <NavLink to='/admin/node' w="100%">
+                                    <Button
+                                      variant="no-hover"
+                                      bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
+                                      alignSelf="flex-end"
+                                      mt="24px"
+                                      // w={{ sm: "75px", lg: "100px" }}
+                                      // h="300px"
+                                      w="300px" h="125px"
+                                    // onClick={() => {
+                                    //   setOverlay(<OverlayOne />)
+                                    //   onOpenSelect()
+                                    // }}
+                                    >
+
+                                      <Flex direction="column">
+                                        <NavLink to='/admin/default' w="100%" margin="10">
+                                          <Text
+                                            color="gray.400"
+                                            fontSize="xl"
+                                            fontWeight="bold"
+                                            mb="4px"
+                                          >
+                                            Provider
+                                          </Text>
+                                        </NavLink>
+                                      </Flex>
+
+                                    </Button>
+                                  </NavLink>
+                                </Flex>
+                              </Flex>
+                              <Flex direction="column" align="center">
+                                <Flex
+                                  w="300px"
+                                  h="125px"
+                                  borderRadius="12px"
+                                  justify="center"
+                                  transition=".5s all ease"
+                                  border="1px solid lightgray"
+                                  align="center"
+                                  // bg={"linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"}
+                                  // bg='tea.100'
+                                  // bg={checkboxes.design ? "teal.300" : "#fff"}
+                                  _hover={{ opacity: "0.8" }}
+                                >
+                                  <NavLink to='/admin/node' w="100%">
+                                    <Button
+                                      variant="no-hover"
+                                      bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
+                                      alignSelf="flex-end"
+                                      mt="24px"
+                                      // w={{ sm: "75px", lg: "100px" }}
+                                      // h="300px"
+                                      w="300px" h="125px"
+                                    // onClick={() => {
+                                    //   setOverlay(<OverlayOne />)
+                                    //   onOpenSelect()
+                                    // }}
+                                    >
+                                      <Flex direction="column">
+
+                                        <Text
+                                          color="gray.400"
+                                          fontSize="xl"
+                                          fontWeight="bold"
+                                          mb="4px"
+                                        >
+                                          Node
+                                        </Text>
+
+                                      </Flex>
+                                    </Button>
+                                  </NavLink>
+                                </Flex>
+                              </Flex>
+                            </Stack>
+                          </Flex>
+                        </Box>
+                        {/* <Flex>
+                          <Flex
+                            direction="column"
+                            align="center"
+                            justify="center"
+                            textAlign="center"
+                            w="100%"
+                          // mx="auto"
+                          >
+                            <Text
+                              color={!textColor}
+                              fontSize={{ sm: "xl", md: "100" }}
+                              fontWeight="bold"
+                              mb="4px"
+                            >
+                              Select Your Role
+                            </Text>
+                            <Text color="gray.400" fontWeight="normal" fontSize="sm">
                           Please enter project details below
-                        </Text> */}
-                        </Flex>
-                      </Flex>
-                      <Flex
-                        // mx="auto"
-                        direction="column"
-                        minH="10vh"
-                        align="center"
-                        pt={{ sm: "125px", lg: "75px" }}
-                      >
-                        <Flex alignContent="center" width={{ base: '100%', sm: '50%', md: '25%' }} flexDirection="row" mx="auto">
-                          <Stack align="left" direction={{ sm: "column", md: "row" }}>
-                            <NavLink to='/admin/default' w="100%" margin="10">
-                              <Button
-                                fontSize='xl'
-                                variant='brand'
-                                fontWeight='500'
-                                width={{ base: "25%", sm: '50%', md: '100%' }}
-                                h='3rem'
-                                // mb='100'
-                                mr={{ md: "100" }}
-                                // mr={{ md: "200" }}
-                                onClick={onOpenNav}>
-                                Provider
-                              </Button>
-                            </NavLink>
-                            <NavLink to='/admin/node' w="100%" margin="10">
-                              <Button
-                                fontSize='xl'
-                                variant='brand'
-                                fontWeight='500'
-                                width={{ base: "25%", sm: '50%', md: '100%' }}
-                                h='3rem'
-                                // mb='100'
-                                mr={{ md: "100" }}
-                                // mr="50"
-                                onClick={onOpenNav}>
-                                Node
-                              </Button>
-                            </NavLink>
-                          </Stack>
-                        </Flex>
-                      </Flex>
+                        </Text>
+                          </Flex>
+                        </Flex> */}
+                        {/* <Flex
+                          // mx="auto"
+                          direction="column"
+                          minH="10vh"
+                          align="center"
+                          pt={{ sm: "125px", lg: "75px" }}
+                        >
+                          <Flex alignContent="center" width={{ base: '100%', sm: '50%', md: '25%' }} flexDirection="row" mx="auto">
+                            <Stack align="left" direction={{ sm: "column", md: "row" }}>
+                              <NavLink to='/admin/default' w="100%" margin="10">
+                                <Button
+                                  fontSize='xl'
+                                  variant='brand'
+                                  fontWeight='500'
+                                  width={{ base: "25%", sm: '50%', md: '100%' }}
+                                  h='3rem'
+                                  // mb='100'
+                                  mr={{ md: "100" }}
+                                  // mr={{ md: "200" }}
+                                  onClick={onOpenNav}>
+                                  Provider
+                                </Button>
+                              </NavLink>
+                              <NavLink to='/admin/node' w="100%" margin="10">
+                                <Button
+                                  fontSize='xl'
+                                  variant='brand'
+                                  fontWeight='500'
+                                  width={{ base: "25%", sm: '50%', md: '100%' }}
+                                  h='3rem'
+                                  // mb='100'
+                                  mr={{ md: "100" }}
+                                  // mr="50"
+                                  onClick={onOpenNav}>
+                                  Node
+                                </Button>
+                              </NavLink>
+                            </Stack>
+                          </Flex>
+                        </Flex> */}
+                      </Box>
                     </Box>
                   </ModalBody>
                 </ModalContent>
