@@ -88,6 +88,7 @@ import Stepper from "./components/Stepper";
 import socket from "../socket";
 
 
+
 export default function UserReports() {
   const { isOpen: isOpenAdd, onOpen: onOpenAdd, onClose: onCloseAdd } = useDisclosure()
   const { isOpen: isOpenInfo, onOpen: onOpenInfo, onClose: onCloseInfo } = useDisclosure()
@@ -106,12 +107,14 @@ export default function UserReports() {
   const [string, setString] = useState("");
   const [credits, setCredits] = useState(500);
   const [tableData, setTableData] = useState([{}]);
-  const [projectData, setProjectData] = useState([{
+  const [projectData, setProjectData] = useState([
+    {
     "name": "Project 1",
     "status": "Not started",
     "date": "2 Feb 2023",
     "progress": 100,
-  }]);
+  }
+]);
   // const [projectData, setProjectData] = useState([{}]);
   const [connectionState, setConnectionState] = useState(false);
   const [overlay, setOverlay] = React.useState(<OverlayOne />)
@@ -119,6 +122,7 @@ export default function UserReports() {
   const [clicked, toggleClicked] = useState(false);
   const [rowUnderProgress, setRowUnderProgress] = useState(0);
   const [activeNodes, setActiveNodes] = useState(0);
+  const [nodesData, setNodesData] = useState([{}]);
   // const [status, setStatus] = useState([]);
   const [infoRow, setInfoRow] = useState(0);
   // const [overlay, setOverlay] = React.useState(<OverlayOne />)
@@ -144,8 +148,10 @@ export default function UserReports() {
       toggleClicked(!clicked);
       data[index].status = "In progress";
       data[index].progress = 50;
+      let temp = data[index];
+      temp.status = "Completed";
       setProjectData(data);
-      startProject();
+      startProject(temp);
     } else if (data[index].status === "In progress") {
       data[index].status = "Completed";
       data[index].progress = 100;
@@ -192,6 +198,11 @@ export default function UserReports() {
       handleProgress(rowUnderProgress);
     });
 
+    socket.on("node data", function(data){
+      console.log("node data", data);
+      setNodesData([...nodesData, data]);
+    })
+
     return () => {
       socket.off('connect');
       socket.off('disconnect');
@@ -201,8 +212,8 @@ export default function UserReports() {
   // const joinProvider = () => {
   // socket.emit("join provider", socket.id);
   // };
-  const startProject = () => {
-    socket.emit("split data", string);
+  const startProject = (project) => {
+    socket.emit("split data", {string:string, project:project});
     // console.log(string);
     console.log("start project", string);
   };
@@ -488,11 +499,13 @@ export default function UserReports() {
               <Text color="gray.400" fontWeight="normal" fontSize="xl">
                 Task {infoData[infoRow].status}
               </Text>
-              {(infoData[infoRow].status === 'Completed') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl"> 40 credits debited </Text></Flex>)}
+              {(infoData[infoRow].status === 'Completed') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl"> 40 credits debited </Text>
+              </Flex>)}
               {(infoData[infoRow].status === 'In progress') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">Waiting for final output ⏳</Text></Flex>)}
               {(infoData[infoRow].status === 'Not started') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">Yet to start </Text></Flex>)}
-
-
+              {nodesData.map((node, index) => {
+                  return (<Text>{`client: ${node.client} status: ${node.status}`}</Text>)
+              })}
             </Flex>
           </ModalBody>
           <ModalFooter></ModalFooter>
