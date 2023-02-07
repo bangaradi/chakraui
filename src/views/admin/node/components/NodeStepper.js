@@ -200,7 +200,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, joinN
         <Box paddingTop={{ xl: "130px" }}>
             <Flex
                 direction="column"
-                minH="100vh"
+                minH="70vh"
                 align="center"
                 pt={{ sm: "125px", lg: "75px" }}
             >

@@ -24,7 +24,7 @@ import IconBox from "./components/IconBox";
 import { MdBarChart, MdAttachMoney } from "react-icons/md";
 import ComplexTable from "./components/ComplexTable";
 // import tableDataComplex from "./variables/tableDataComplex.json";
-import tableData from "./variables/tableDataComplex.json";
+// import tableData from "./variables/tableDataComplex.json";
 import { Flex, Spacer } from "@chakra-ui/react";
 import { FormLabel } from "@chakra-ui/react";
 import { Avatar } from "@chakra-ui/react";
@@ -106,7 +106,15 @@ const columnsDataComplex = [
 
 
 export default function NodeDashboard(params) {
+  const [tableData, setTableData] = useState([
+    {
+      "name":"Project 1",
+      "status": "Completed",
+      "date": "18 Apr 2022",
+      "progress": 75.5  
+    },
 
+  ]);
   let checkHash = useRef("");
   // let checkHash = ""
   // const [checkHash, setCheckHash] = useState("");
