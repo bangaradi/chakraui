@@ -113,6 +113,7 @@ export default function UserReports() {
     "progress": 100,
   }]);
   // const [projectData, setProjectData] = useState([{}]);
+  const [connectionState, setConnectionState] = useState(false);
   const [overlay, setOverlay] = React.useState(<OverlayOne />)
   const [show, setShow] = useState(false);
   const [clicked, toggleClicked] = useState(false);
@@ -178,6 +179,11 @@ export default function UserReports() {
 
   useEffect(() => {
     // socket.emit("join provider", socket.id);
+    socket.on("node data", function (data) {
+      // console.log("node data found");
+      setActiveNodes(data);
+
+    });
 
     socket.on("found", function (data) {
       console.log("inside found");
@@ -241,7 +247,7 @@ export default function UserReports() {
           value='$642.39'
         /> */}
         {/* sales */}
-        <MiniStatistics name='Hive Credits' value={credits} />
+        <MiniStatistics name='Hive Coins' value={credits} />
         {/* balance */}
         <MiniStatistics
           // endContent={
@@ -275,7 +281,7 @@ export default function UserReports() {
           //   />
           // }
           name='Nodes Connected'
-          value={activeNodes}
+          value={connectionState ? activeNodes : "Offline"}
         />
         {/* total projects */}
         <MiniStatistics
@@ -351,14 +357,75 @@ export default function UserReports() {
 
         Project Name: {projectName}
       </Text> */}
-      <Button onClick={() => {
-        setOverlay(<OverlayOne />)
-        onOpenAdd()
-      }}>
+      <Flex
+        w="100%"
+        h="80px"
+        alignContent="space-between"
+        justifyContent="space-between"
+        borderRadius="12px"
+        // justify="center"
+        transition=".5s all ease"
+        // border="1px solid lightgray"
+        align="center"
+        // bg={"linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"}
+        // bg='tea.100'
+        // bg={checkboxes.design ? "teal.300" : "#fff"}
+        _hover={{ opacity: "0.8" }}
+      >
+        <Button w="300px" h="50px" border="1px solid lightgray" bg={connectionState ? "red.300" : "lightgray"} onClick={() => {
+          connectProvider();
+          setConnectionState(true);
 
-        Add Project
-      </Button>
-      <Button onClick={connectProvider}>Connect</Button>
+        }
+        }>{connectionState ? "Disconnect" : "Connect"}</Button>
+        <Button
+          variant="no-hover"
+          bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
+          alignSelf="flex-end"
+          mt="24px"
+          // w={{ sm: "75px", lg: "100px" }}
+          // h="300px"
+          w="300px" h="50px"
+          onClick={() => {
+            setOverlay(<OverlayOne />)
+            onOpenAdd()
+          }}
+        // onClick={() => {
+        //   setOverlay(<OverlayOne />)
+        //   onOpenSelect()
+        // }}
+        >
+          <Flex direction="column">
+
+            <Text
+              color="gray.400"
+              fontSize="xl"
+              fontWeight="bold"
+              mb="4px"
+            >
+              Add Project
+            </Text>
+
+          </Flex>
+        </Button>
+
+      </Flex>
+      {/* <Button
+        bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
+        alignSelf="flex-end"
+        mt="24px"
+        // w={{ sm: "75px", lg: "100px" }}
+        // h="300px"
+        w="300px" h="125px" onClick={() => {
+          setOverlay(<OverlayOne />)
+          onOpenAdd()
+        }}>
+
+        <Text color="white">Add Project</Text>
+      </Button> */}
+      <Box mt="50px" >
+
+      </Box>
       <Modal isCentered isOpen={isOpenAdd} onClose={onCloseAdd} size='full'>
         {/* {overlay} */}
         <ModalContent>

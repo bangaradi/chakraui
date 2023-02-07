@@ -287,35 +287,35 @@ function SignIn() {
                                   // bg={checkboxes.design ? "teal.300" : "#fff"}
                                   _hover={{ opacity: "0.8" }}
                                 >
-                                  <NavLink to='/admin/node' w="100%">
-                                    <Button
-                                      variant="no-hover"
-                                      bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
-                                      alignSelf="flex-end"
-                                      mt="24px"
-                                      // w={{ sm: "75px", lg: "100px" }}
-                                      // h="300px"
-                                      w="300px" h="125px"
-                                    // onClick={() => {
-                                    //   setOverlay(<OverlayOne />)
-                                    //   onOpenSelect()
-                                    // }}
-                                    >
+                                    <NavLink to='/admin/node' w="100%">
+                                  <Button
+                                    variant="no-hover"
+                                    bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
+                                    alignSelf="flex-end"
+                                    mt="24px"
+                                    // w={{ sm: "75px", lg: "100px" }}
+                                    // h="300px"
+                                    w="300px" h="125px"
+                                  // onClick={() => {
+                                  //   setOverlay(<OverlayOne />)
+                                  //   onOpenSelect()
+                                  // }}
+                                  >
 
-                                      <Flex direction="column">
-                                        <NavLink to='/admin/default' w="100%" margin="10">
-                                          <Text
-                                            color="gray.400"
-                                            fontSize="xl"
-                                            fontWeight="bold"
-                                            mb="4px"
-                                          >
-                                            Provider
-                                          </Text>
-                                        </NavLink>
-                                      </Flex>
+                                    <Flex direction="column">
+                                      <NavLink to='/admin/default' w="100%" margin="10">
+                                        <Text
+                                          color="gray.400"
+                                          fontSize="xl"
+                                          fontWeight="bold"
+                                          mb="4px"
+                                        >
+                                          Provider
+                                        </Text>
+                                      </NavLink>
+                                    </Flex>
 
-                                    </Button>
+                                  </Button>
                                   </NavLink>
                                 </Flex>
                               </Flex>
