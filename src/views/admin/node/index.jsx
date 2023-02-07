@@ -107,12 +107,13 @@ const columnsDataComplex = [
 
 export default function NodeDashboard(params) {
   const [tableData, setTableData] = useState([
-    {
-      "name":"Project 1",
-      "status": "Completed",
-      "date": "18 Apr 2022",
-      "progress": 75.5  
-    },
+    // {
+    //   "name":"Project 1",
+    //   "status": "Completed",
+    //   "date": "18 Apr 2022",
+    //   "progress": 75.5  
+    // },
+    // {},
 
   ]);
   let checkHash = useRef("");
@@ -153,6 +154,12 @@ export default function NodeDashboard(params) {
   const addressTab = useRef();
   // const [socket, setSocket] = useState({});
   // const socket = io.connect('http://localhost:3001');
+
+  function updateTable(project){
+    let temp = [...tableData, project];
+    setTableData(temp);
+  }
+
   const joinNode = () => {
     params.socket.emit("join node", params.socket.id);
     params.socket.emit("get checkHash");
@@ -194,8 +201,10 @@ export default function NodeDashboard(params) {
       let found = -1;
       // start_time = new Date().getTime();
       // found = implementSearch(str, checkHash);
-      console.log("finding hash: ", checkHash, " in string: ", data.length);
-      found = implementSearch(data, checkHash)
+      console.log("finding hash: ", checkHash, " in string: ", data.string.length);
+      found = implementSearch(data.string, checkHash)
+      // setTableData([...tableData, data.project])
+      updateTable(data.project);
       // end_time = new Date().getTime();
       // console.log("time taken: ", end_time - start_time);
       if (found > -1) {
