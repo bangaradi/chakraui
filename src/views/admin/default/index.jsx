@@ -117,6 +117,7 @@ export default function UserReports() {
   const [show, setShow] = useState(false);
   const [clicked, toggleClicked] = useState(false);
   const [rowUnderProgress, setRowUnderProgress] = useState(0);
+  const [activeNodes, setActiveNodes] = useState(0);
   // const [status, setStatus] = useState([]);
   const [infoRow, setInfoRow] = useState(0);
   // const [overlay, setOverlay] = React.useState(<OverlayOne />)
@@ -264,18 +265,18 @@ export default function UserReports() {
           value='250'
         />
         {/* new taskts */}
-        {/* <MiniStatistics
-          startContent={
-            <IconBox
-              w='56px'
-              h='56px'
-              bg='linear-gradient(90deg, #4481EB 0%, #04BEFE 100%)'
-              icon={<Icon w='28px' h='28px' as={MdAddTask} color='white' />}
-            />
-          }
-          name='New Tasks'
-          value='154'
-        /> */}
+        <MiniStatistics
+          // startContent={
+          //   <IconBox
+          //     w='56px'
+          //     h='56px'
+          //     bg='linear-gradient(90deg, #4481EB 0%, #04BEFE 100%)'
+          //     icon={<Icon w='28px' h='28px' as={MdAddTask} color='white' />}
+          //   />
+          // }
+          name='Nodes Connected'
+          value= {activeNodes}
+        />
         {/* total projects */}
         <MiniStatistics
           startContent={
@@ -420,7 +421,7 @@ export default function UserReports() {
               <Text color="gray.400" fontWeight="normal" fontSize="xl">
                 Task {infoData[infoRow].status}
               </Text>
-              {(infoData[infoRow].status === 'Completed') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">You have earned 40 credits from this task 🔥</Text></Flex>)}
+              {(infoData[infoRow].status === 'Completed') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl"> 40 credits debited 🔥</Text></Flex>)}
               {(infoData[infoRow].status === 'In progress') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">Waiting for final output ⏳</Text></Flex>)}
               {(infoData[infoRow].status === 'Not started') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">Yet to start </Text></Flex>)}
 
