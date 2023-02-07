@@ -956,7 +956,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, setSt
                                                                             fontWeight="bold"
                                                                             mb="4px"
                                                                         >
-                                                                            1.25 times faster
+                                                                           {value == "Normal"? "Recommended": ""}
                                                                         </Text>
                                                                         <Text
                                                                             marginTop="10px"

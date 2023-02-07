@@ -305,7 +305,7 @@ export default function NodeDashboard(params) {
           name='Spend this month'
           value='$642.39'
         /> */}
-        <MiniStatistics name='Hive Credits' value='450' />
+        <MiniStatistics name='Hive Coins' value='450' />
         <MiniStatistics
           // endContent={
           //   <Select
