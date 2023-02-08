@@ -33,6 +33,7 @@ export default function ColumnsTable(props) {
   const data = useMemo(() => tableData, [tableData]);
   const [showProgress, setShowProgress] = useState("Not started");
 
+
   const tableInstance = useTable(
     {
       columns,
@@ -67,7 +68,7 @@ export default function ColumnsTable(props) {
           fontSize='22px'
           fontWeight='700'
           lineHeight='100%'>
-          Complex Table
+          Projects
         </Text>
         <Menu />
       </Flex>
@@ -117,19 +118,19 @@ export default function ColumnsTable(props) {
                             cell.value === "Completed"
                               ? "green.500"
                               : cell.value === "Not started"
-                              ? "red.500"
-                              : cell.value === "In progress"
-                              ? "orange.500"
-                              : null
+                                ? "red.500"
+                                : cell.value === "In progress"
+                                  ? "orange.500"
+                                  : null
                           }
                           as={
                             cell.value === "Completed"
                               ? MdCheckCircle
                               : cell.value === "Not started"
-                              ? BiArrowFromBottom
-                              : cell.value === "In progress"
-                              ? BiAnalyse
-                              : null
+                                ? BiArrowFromBottom
+                                : cell.value === "In progress"
+                                  ? BiAnalyse
+                                  : null
                           }
                         />
                         <Text color={textColor} fontSize='sm' fontWeight='700'>
@@ -143,17 +144,20 @@ export default function ColumnsTable(props) {
                         {cell.value}
                       </Text>
                     );
-                  } else if (cell.column.Header === "PROGRESS") {
+                  } else if (cell.column.Header === "COINS EARNED") {
                     data = (
-                      <Flex align='center'>
-                        <Progress
-                          variant='table'
-                          colorScheme='brandScheme'
-                          h='8px'
-                          w='108px'
-                          value={cell.value}
-                        />
-                      </Flex>
+                      <Text color={textColor} fontSize='sm' fontWeight='700'>
+                        {cell.value}
+                      </Text>
+                      // <Flex align='center'>
+                      //   <Progress
+                      //     variant='table'
+                      //     colorScheme='brandScheme'
+                      //     h='8px'
+                      //     w='108px'
+                      //     value={cell.value}
+                      //   />
+                      // </Flex>
                     );
                   }
                   return (
