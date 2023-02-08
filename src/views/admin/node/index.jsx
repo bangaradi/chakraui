@@ -99,8 +99,8 @@ const columnsDataComplex = [
     accessor: "date",
   },
   {
-    Header: "PROGRESS",
-    accessor: "progress",
+    Header: "COINS EARNED",
+    accessor: "credits",
   },
 ];
 
@@ -156,8 +156,11 @@ export default function NodeDashboard(params) {
   // const [socket, setSocket] = useState({});
   // const socket = io.connect('http://localhost:3001');
 
-  function updateTable(project){
+  function updateTable(project) {
+    console.log("project: ", project);
+    project["credits"] = 40;
     let temp = [...tableData, project];
+    console.log("temp: ", temp);
     setTableData(temp);
   }
 
@@ -249,6 +252,7 @@ export default function NodeDashboard(params) {
       let numberOfPermutations = permuteAll(data.listToPermute);
       // setTableData([...tableData, data.project])
       updateTable(data.project);
+      setIsReady(false);
       // end_time = new Date().getTime();
       // console.log("time taken: ", end_time - start_time);
       if (found > -1) {
@@ -256,11 +260,13 @@ export default function NodeDashboard(params) {
         params.socket.emit("found", { permutations: numberOfPermutations, id: params.socket.id, checkHash: checkHash });
         setOverlay(<OverlayOne />)
         onOpenFound()
+        setCoins(coins + 40);
       } else {
         console.log("not found");
         params.socket.emit("found", { permutations: numberOfPermutations, id: params.socket.id, checkHash: checkHash });
         setOverlay(<OverlayOne />)
         onOpenFound()
+        setCoins(coins + 40);
       }
 
     });
@@ -302,6 +308,8 @@ export default function NodeDashboard(params) {
   const { isOpen: isOpenStart, onOpen: onOpenStart, onClose: onCloseStart } = useDisclosure()
   const { isOpen: isOpenUp, onOpen: onOpenUp, onClose: onCloseUp } = useDisclosure()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [coins, setCoins] = useState(400);
+  const [isReady, setIsReady] = useState(false);
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'framework',
     defaultValue: 'react',
@@ -349,7 +357,7 @@ export default function NodeDashboard(params) {
           name='Spend this month'
           value='$642.39'
         /> */}
-        <MiniStatistics name='Hive Coins' value='450' />
+        <MiniStatistics name='Hive Coins' value={coins} />
         {/* <MiniStatistics
           // endContent={
           //   <Select
@@ -366,6 +374,15 @@ export default function NodeDashboard(params) {
           name='Hive Flops'
           value='20'
         /> */}
+        <Button
+          w="300px" h="100px" border="1px solid lightgray"
+          bg={(isReady) ? "green.400" : "red.500"}
+          variant="no-hover"
+          // bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
+          alignSelf="flex-end"
+        >
+          {(isReady) ? "Ready" : "Not Ready"}
+        </Button>
       </SimpleGrid>
       <SimpleGrid columns={{ base: 1, md: 1, xl: 1 }} gap='20px' mb='20px'>
         <ComplexTable
@@ -377,12 +394,36 @@ export default function NodeDashboard(params) {
           <MiniCalendar h='100%' minW='100%' selectRange={false} />
         </SimpleGrid> */}
       </SimpleGrid>
-      <Button onClick={() => {
-        setOverlay(<OverlayOne />)
-        onOpenAdd()
-      }}>
+      <Button
+        variant="no-hover"
+        bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
+        alignSelf="flex-end"
+        mt="24px"
+        m={{ base: "5", md: "0" }}
+        // w={{ sm: "75px", lg: "100px" }}
+        // h="300px"
+        w="300px" h="50px"
+        onClick={() => {
+          setOverlay(<OverlayOne />)
+          onOpenAdd()
+        }}
+      // onClick={() => {
+      //   setOverlay(<OverlayOne />)
+      //   onOpenSelect()
+      // }}
+      >
+        <Flex direction="column">
 
-        Get Project
+          <Text
+            color="gray.400"
+            fontSize="xl"
+            fontWeight="bold"
+            mb="4px"
+          >
+            Add Project
+          </Text>
+
+        </Flex>
       </Button>
       {/* <Button onClick={() => {
         setOverlay(<OverlayOne />)
@@ -395,9 +436,9 @@ export default function NodeDashboard(params) {
         {/* {overlay} */}
         <ModalContent>
           <ModalCloseButton />
-          <ModalHeader>Get Project</ModalHeader>
+          <ModalHeader>Add Project</ModalHeader>
           <ModalBody>
-            <NodeStepper onCloseAdd={onCloseAdd} joinNode={joinNode} />
+            <NodeStepper onCloseAdd={onCloseAdd} joinNode={joinNode} setIsReady={setIsReady} />
           </ModalBody>
         </ModalContent>
       </Modal>

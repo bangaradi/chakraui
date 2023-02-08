@@ -126,7 +126,7 @@ function RadioCard(props) {
 }
 
 
-export default function Stepper({ projectData, setProjectData, onCloseAdd, joinNode }) {
+export default function Stepper({ projectData, setProjectData, onCloseAdd, joinNode, setIsReady }) {
     const textColor = useColorModeValue("gray.700", "white");
     const bgPrevButton = useColorModeValue("gray.100", "gray.100");
     const iconColor = useColorModeValue("gray.300", "gray.700");
@@ -135,6 +135,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, joinN
         account: false,
         address: false
     });
+    const [isConfig, setIsConfig] = useState(true);
     const [start, setStart] = useState(false)
     const [checkboxes, setCheckboxes] = useState({
         design: false,
@@ -184,7 +185,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, joinN
         defaultValue: 'react',
         onChange: console.log,
     });
-    // const [data, setData] = useState({})
+    const [configStatus, setConfigStatus] = useState("Loading...")
     const [projectName, setProjectName] = useState("");
     const [date, setDate] = useState("");
     function getDate() {
@@ -378,8 +379,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, joinN
                                             Run Configuration Test
                                         </Text>
                                         <Text color="gray.400" fontWeight="normal" fontSize="sm">
-                                            Give us more details about you. What do you enjoy doing in
-                                            your spare time?
+                                            Give us more details about your device
                                         </Text>
                                     </Flex>
                                 </Flex>
@@ -408,7 +408,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, joinN
                                                     onClick={() => {
                                                         setOverlay(<OverlayOne />)
                                                         onOpenUp()
-                                                        
+
                                                     }}
                                                 >
                                                     {/* <Icon
@@ -429,10 +429,10 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, joinN
                                                 <Modal isCentered isOpen={isOpenUp} onClose={onCloseUp}>
                                                     {overlay}
                                                     <ModalContent>
-                                                        <ModalHeader>Upload</ModalHeader>
+                                                        <ModalHeader>Run Configuration Test</ModalHeader>
                                                         <ModalCloseButton />
                                                         <ModalBody>
-                                                            <Input
+                                                            {/* <Input
                                                                 placeholder="Select Date and Time"
                                                                 size="md"
                                                                 type="file"
@@ -440,7 +440,32 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, joinN
                                                                     handleFile(file)
                                                                 }
                                                                 }
-                                                            />
+                                                            /> */}
+                                                            {
+                                                                setTimeout(() => {
+                                                                    setIsConfig(false)
+                                                                    setConfigStatus("Passed")
+                                                                }, 5000)
+                                                            }
+                                                            <Flex direction="column" justifyContent="center">
+                                                                <Button
+                                                                    isLoading={isConfig}
+                                                                    loadingText='Running Configuration Test'
+                                                                    colorScheme='teal'
+                                                                    variant='outline'
+                                                                >Configuration Test Passed</Button>
+                                                                <Flex alignItems="center" justifyContent="center">
+                                                                    <Text
+                                                                        mt="20px"
+                                                                        color="black"
+                                                                        fontSize="lg"
+                                                                        fontWeight="bold"
+                                                                        mb="4px"
+                                                                    >
+                                                                        {configStatus}
+                                                                    </Text>
+                                                                </Flex>
+                                                            </Flex>
                                                             {/* <Select
                                     cursor="pointer"
                                     bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
@@ -455,9 +480,9 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, joinN
                                                             {/* <Text>Custom backdrop filters!</Text> */}
                                                         </ModalBody>
                                                         <ModalFooter>
-                                                            <Button onClick={() => {
+                                                            {/* <Button onClick={() => {
                                                                 onCloseUp()
-                                                            }}>Upload</Button>
+                                                            }}>Upload</Button> */}
                                                         </ModalFooter>
                                                     </ModalContent>
                                                 </Modal>
@@ -515,8 +540,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, joinN
                                             Settings
                                         </Text>
                                         <Text color="gray.400" fontWeight="normal" fontSize="sm">
-                                            Give us more details about you. What do you enjoy doing in
-                                            your spare time?
+                                            When can you contribute?
                                         </Text>
                                     </Flex>
                                 </Flex>
@@ -549,7 +573,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, joinN
                                                         borderRadius="15px"
                                                         placeholder="eg. Michael"
                                                         fontSize="xl"
-                                                        type= "time"/>
+                                                        type="time" />
                                                 </FormControl>
                                                 <FormControl>
                                                     <FormLabel
@@ -563,7 +587,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, joinN
                                                         borderRadius="15px"
                                                         placeholder="eg. Jackson"
                                                         fontSize="xl"
-                                                        type= "time"
+                                                        type="time"
                                                     />
                                                 </FormControl>
                                                 <FormControl>
@@ -633,10 +657,10 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, joinN
                                         >
                                             Almost there ...
                                         </Text>
-                                        <Text color="gray.400" fontWeight="normal" fontSize="sm">
+                                        {/* <Text color="gray.400" fontWeight="normal" fontSize="sm">
                                             One thing I love about the later sunsets is the chance to go
                                             for a walk through the neighborhood woods before dinner
-                                        </Text>
+                                        </Text> */}
                                     </Flex>
                                 </Flex>
                                 <Box>
@@ -664,9 +688,12 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, joinN
                                                         w="150px" h="150px"
                                                         onClick={() => {
                                                             setOverlay(<OverlayOne />)
+                                                            setConfigStatus("Loading ...");
+                                                            setIsConfig(true);
+                                                            setIsReady(true);
                                                             // onOpenUp();
                                                             joinNode();
-                                                            if(setStart) onCloseAdd();
+                                                            if (setStart) onCloseAdd();
                                                         }}
                                                     >
                                                         {/* <Icon

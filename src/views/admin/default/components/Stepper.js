@@ -354,7 +354,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, setSt
                                     _hover={{ color: textColor }}
                                     display={{ sm: "none", md: "block" }}
                                 >
-                                    Upload Your Code
+                                    Upload Your Project
                                 </Text>
                             </Flex>
                         </Tab>
@@ -460,7 +460,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, setSt
                                                     </FormLabel>
                                                     <Input
                                                         borderRadius="15px"
-                                                        placeholder="eg. Michael"
+                                                        placeholder="Project Name"
                                                         fontSize="xs"
                                                         onChange={(event) => {
                                                             getDate();
@@ -480,7 +480,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, setSt
                                                     </FormLabel>
                                                     <Input
                                                         borderRadius="15px"
-                                                        placeholder="eg. Jackson"
+                                                        placeholder="Project Description"
                                                         fontSize="xs"
                                                     />
                                                 </FormControl>
@@ -494,7 +494,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, setSt
                                                     </FormLabel>
                                                     <Input
                                                         borderRadius="15px"
-                                                        placeholder="eg. example@address.com"
+                                                        placeholder="Project URL"
                                                         fontSize="xs"
                                                     />
                                                 </FormControl>
@@ -534,12 +534,12 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, setSt
                                             fontWeight="bold"
                                             mb="4px"
                                         >
-                                            Upload Your Code
+                                            Upload Your Project
                                         </Text>
-                                        <Text color="gray.400" fontWeight="normal" fontSize="sm">
+                                        {/* <Text color="gray.400" fontWeight="normal" fontSize="sm">
                                             Give us more details about you. What do you enjoy doing in
                                             your spare time?
-                                        </Text>
+                                        </Text> */}
                                     </Flex>
                                 </Flex>
                                 <Box>
@@ -585,17 +585,17 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, setSt
                               /> */}
                                                             <Text
                                                                 color="gray.400"
-                                                                fontSize="lg"
+                                                                fontSize="sm"
                                                                 fontWeight="bold"
                                                                 mb="4px"
                                                             >
-                                                                Choose a Server
+                                                                Choose Project Type
                                                             </Text>
                                                         </Button>
                                                         <Modal isCentered isOpen={isOpen} onClose={onClose} size="xl">
                                                             {overlay}
                                                             <ModalContent>
-                                                                <ModalHeader>Choose a Server</ModalHeader>
+                                                                <ModalHeader>Choose Project Type</ModalHeader>
                                                                 <ModalCloseButton />
                                                                 <ModalBody>
                                                                     <Select
@@ -603,10 +603,11 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, setSt
                                                                         bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
                                                                         borderColor="gray.400"
                                                                         color='white'
-                                                                        placeholder='Choose a Server'
+                                                                        placeholder='Project Type'
                                                                     >
-                                                                        <option value='option1'>Server 1</option>
-                                                                        <option value='option2'>Server 2</option>
+                                                                        <option value='option1'> Protein Unfolding</option>
+                                                                        <option value='option2'>Video Rendering</option>
+                                                                        <option value='option3'> Climate Data Processing</option>
                                                                         {/* <option value='option3'>Option 3</option> */}
                                                                     </Select>
                                                                     {/* <Text>Custom backdrop filters!</Text> */}
@@ -631,7 +632,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, setSt
                                                     </Flex>
                                                 </FormLabel>
                                                 <Text color={textColor} fontWeight="bold" fontSize="md">
-                                                    Choose a Server
+                                                    Choose Project Type
                                                 </Text>
                                             </Flex>
                                             <Flex direction="column" align="center">
@@ -883,10 +884,10 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, setSt
                                         >
                                             Almost there ...
                                         </Text>
-                                        <Text color="gray.400" fontWeight="normal" fontSize="sm">
+                                        {/* <Text color="gray.400" fontWeight="normal" fontSize="sm">
                                             One thing I love about the later sunsets is the chance to go
                                             for a walk through the neighborhood woods before dinner
-                                        </Text>
+                                        </Text> */}
                                     </Flex>
                                 </Flex>
                                 <Box>
@@ -956,7 +957,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, setSt
                                                                             fontWeight="bold"
                                                                             mb="4px"
                                                                         >
-                                                                           {value == "Normal"? "Recommended": ""}
+                                                                            {value == "Normal" ? "Recommended" : ""}
                                                                         </Text>
                                                                         <Text
                                                                             marginTop="10px"
@@ -1235,7 +1236,7 @@ export default function Stepper({ projectData, setProjectData, onCloseAdd, setSt
                                                 }}
                                             >
                                                 <Text fontSize="xs" color="#fff" fontWeight="bold">
-                                                    SEND
+                                                    ADD
                                                 </Text>
                                             </Button>
                                         </Flex>

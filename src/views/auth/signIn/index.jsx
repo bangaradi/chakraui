@@ -86,7 +86,7 @@ function SignIn() {
     router
   }
   return (
-    <DefaultAuth illustrationBackground={illustration} image={illustration}>
+    <DefaultAuth illustrationBackground={illustration} image={illustration}>  
       <DefaultAuth>
         <Flex
           maxW={{ base: "100%", md: "max-content" }}
@@ -100,7 +100,36 @@ function SignIn() {
           px={{ base: "25px", md: "0px" }}
           mt={{ base: "40px", md: "14vh" }}
           flexDirection='column'>
-          <Box me='auto'>
+            <Box
+              fontSize='sm'
+              me='0px'
+              mb='26px'
+              py='15px'
+              h='50px'
+              borderRadius='16px'
+              // bg={googleBg}
+              // color={googleText}
+              // fontWeight='500'
+              // _hover={googleHover}
+              // _active={googleActive}
+              // _focus={googleActive}
+              >
+              {/* <Icon as={FcGoogle} w='20px' h='20px' me='10px' />
+              Sign in with Google */}
+            </Box>
+          
+          <Flex
+            zIndex='2'
+            direction='column'
+            w={{ base: "100%", md: "420px" }}
+            maxW='100%'
+            background='transparent'
+            borderRadius='15px'
+            mx={{ base: "auto", lg: "unset" }}
+            me='auto'
+            mb={{ base: "20px", md: "auto" }}>
+            
+            <Box me='auto'>
             <Heading color={textColor} fontSize='36px' mb='10px'>
               Sign In
             </Heading>
@@ -113,32 +142,6 @@ function SignIn() {
               Enter your email and password to sign in!
             </Text>
           </Box>
-          <Flex
-            zIndex='2'
-            direction='column'
-            w={{ base: "100%", md: "420px" }}
-            maxW='100%'
-            background='transparent'
-            borderRadius='15px'
-            mx={{ base: "auto", lg: "unset" }}
-            me='auto'
-            mb={{ base: "20px", md: "auto" }}>
-            {/* <Button
-              fontSize='sm'
-              me='0px'
-              mb='26px'
-              py='15px'
-              h='50px'
-              borderRadius='16px'
-              bg={googleBg}
-              color={googleText}
-              fontWeight='500'
-              _hover={googleHover}
-              _active={googleActive}
-              _focus={googleActive}>
-              <Icon as={FcGoogle} w='20px' h='20px' me='10px' />
-              Sign in with Google
-            </Button> */}
             <Flex align='center' mb='25px'>
               <HSeparator />
               {/* <Text color='gray.400' mx='14px'>
