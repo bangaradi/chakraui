@@ -152,6 +152,7 @@ export default function NodeDashboard(params) {
   const aboutTab = useRef();
   const accountTab = useRef();
   const addressTab = useRef();
+  // const [permutations, setPermutations] = useState([]);
   // const [socket, setSocket] = useState({});
   // const socket = io.connect('http://localhost:3001');
 
@@ -168,20 +169,62 @@ export default function NodeDashboard(params) {
     params.socket.emit("get checkHash");
   };
 
-  function implementSearch(nodeStr, checkHash) {
-    let str_l = nodeStr.length;
-    let checkHash_l = checkHash.length;
-    // let count = 0;
-    for (let i = 0; i < str_l; i++) {
-      let temp = nodeStr.substring(i, i + checkHash_l);
-      if (temp === checkHash) {
-        console.log("found at: ", i);
-        return i;
+  // function implementSearch(nodeStr, checkHash) {
+  //   let str_l = nodeStr.length;
+  //   let checkHash_l = checkHash.length;
+  //   // let count = 0;
+  //   for (let i = 0; i < str_l; i++) {
+  //     let temp = nodeStr.substring(i, i + checkHash_l);
+  //     if (temp === checkHash) {
+  //       console.log("found at: ", i);
+  //       return i;
+  //     }
+  //   }
+  //   console.log("not found");
+  //   return -1;
+  // }
+
+  function permute(str, l, r)
+  {
+    if (l === r){
+      console.log("permuted : ", str);
+      let temp = [...strArr, str];
+      setStrArr(temp);
+      }else{
+        for (let i = l; i <= r; i++)
+        {
+          str = swap(str, l, i);
+          permute(str, l + 1, r);
+          str = swap(str, l, i);
+        }
       }
-    }
-    console.log("not found");
-    return -1;
   }
+
+  function swap(a, i, j)
+  {
+    let temp;
+      let charArray = a.split("");
+      temp = charArray[i] ;
+      charArray[i] = charArray[j];
+      charArray[j] = temp;
+      return (charArray).join("");
+  }
+
+
+  const [strArr, setStrArr] = useState([]);
+  function permuteAll(list){
+    console.log(list);
+    // let stringToPermute = "";
+    list.forEach((element) => {
+      // console.log(String(element));
+      let stringToPermute = String(element);
+      // stringToPermute = element;
+      console.log("permuting: ", stringToPermute);
+      permute(stringToPermute, parseInt(0), parseInt(stringToPermute.length) - 1);
+    });
+    return strArr.length;
+  }
+
 
   useEffect(() => {
     params.socket.on("get checkHash", async function (data) {
@@ -204,8 +247,9 @@ export default function NodeDashboard(params) {
       let found = -1;
       // start_time = new Date().getTime();
       // found = implementSearch(str, checkHash);
-      console.log("finding hash: ", checkHash, " in string: ", data.string.length);
-      found = implementSearch(data.string, checkHash)
+      console.log("permuting the strings:", data.listToPermute);
+      // found = implementSearch(data.string, checkHash)
+      let numberOfPermutations = permuteAll(data.listToPermute);
       // setTableData([...tableData, data.project])
       updateTable(data.project);
       setIsReady(false);
@@ -213,13 +257,13 @@ export default function NodeDashboard(params) {
       // console.log("time taken: ", end_time - start_time);
       if (found > -1) {
         console.log("found");
-        params.socket.emit("found", { found: found, id: params.socket.id, checkHash: checkHash });
+        params.socket.emit("found", { permutations: numberOfPermutations, id: params.socket.id, checkHash: checkHash });
         setOverlay(<OverlayOne />)
         onOpenFound()
         setCoins(coins + 40);
       } else {
         console.log("not found");
-        params.socket.emit("found", { found: found, id: params.socket.id, checkHash: checkHash });
+        params.socket.emit("found", { permutations: numberOfPermutations, id: params.socket.id, checkHash: checkHash });
         setOverlay(<OverlayOne />)
         onOpenFound()
         setCoins(coins + 40);
