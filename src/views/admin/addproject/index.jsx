@@ -451,7 +451,7 @@ export default function ProjectDashboard(params) {
                           </FormLabel>
                           <Input
                             borderRadius="15px"
-                            placeholder="eg. Michael"
+                            placeholder="Project Name"
                             fontSize="xs"
                           />
                         </FormControl>
@@ -465,7 +465,7 @@ export default function ProjectDashboard(params) {
                           </FormLabel>
                           <Input
                             borderRadius="15px"
-                            placeholder="eg. Jackson"
+                            placeholder="Description"
                             fontSize="xs"
                           />
                         </FormControl>
@@ -479,7 +479,7 @@ export default function ProjectDashboard(params) {
                           </FormLabel>
                           <Input
                             borderRadius="15px"
-                            placeholder="eg. example@address.com"
+                            placeholder="Project URL"
                             fontSize="xs"
                           />
                         </FormControl>

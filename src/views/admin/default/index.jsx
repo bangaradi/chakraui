@@ -109,12 +109,12 @@ export default function UserReports() {
   const [tableData, setTableData] = useState([{}]);
   const [projectData, setProjectData] = useState([
     {
-    "name": "Project 1",
-    "status": "Not started",
-    "date": "2 Feb 2023",
-    "progress": 100,
-  }
-]);
+      "name": "Project 1",
+      "status": "Not started",
+      "date": "2 Feb 2023",
+      "progress": 100,
+    }
+  ]);
   // const [projectData, setProjectData] = useState([{}]);
   const [connectionState, setConnectionState] = useState(false);
   const [overlay, setOverlay] = React.useState(<OverlayOne />)
@@ -142,6 +142,8 @@ export default function UserReports() {
     console.log("handle progress", "row number: ", number);
     let data = [...projectData];
     setRowUnderProgress(number);
+    console.log("setting credits");
+    setCredits(credits - 40);
     console.log(number);
     let index = parseInt(number);
     if (data[index].status === "Not started") {
@@ -156,7 +158,8 @@ export default function UserReports() {
       data[index].status = "Completed";
       data[index].progress = 100;
       // setStatus("Completed");
-      setCredits(credits - 40);
+
+      console.log("setting data");
       setProjectData(data);
     }
     // data.map((item, index) => {
@@ -198,7 +201,7 @@ export default function UserReports() {
       handleProgress(rowUnderProgress);
     });
 
-    socket.on("nodedata", function(data){
+    socket.on("nodedata", function (data) {
       console.log("nodedata", data);
       setNodesData([...nodesData, data]);
     })
@@ -213,12 +216,15 @@ export default function UserReports() {
   // socket.emit("join provider", socket.id);
   // };
   const startProject = (project) => {
-    socket.emit("split data", {string:string, project:project});
+    socket.emit("split data", { string: string, project: project });
     // console.log(string);
     console.log("start project", string);
   };
   const connectProvider = () => {
     socket.emit("join provider", socket.id);
+  };
+  const disconnectProvider = () => {
+    window.location.reload();
   };
   var infoData = [...projectData];
   const brandColor = useColorModeValue("brand.500", "white");
@@ -383,12 +389,37 @@ export default function UserReports() {
         // bg={checkboxes.design ? "teal.300" : "#fff"}
         _hover={{ opacity: "0.8" }}
       >
-        <Button w="300px" h="50px" border="1px solid lightgray" bg={connectionState ? "red.300" : "lightgray"} onClick={() => {
-          connectProvider();
-          setConnectionState(true);
+        <Button
+          w="300px" h="50px" border="1px solid lightgray"
+          variant="no-hover"
+          // bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
+          alignSelf="flex-end"
+          mt="24px"
+          // w={{ sm: "75px", lg: "100px" }}
+          // h="300px"
+          // w="300px" h="50px"
+          bg={connectionState ? "red.300" : "white"} onClick={() => {
+            if (connectionState) {
+              disconnectProvider();
+              setConnectionState(false)
+            } else {
+              connectProvider();
+              setConnectionState(true);
+            }
 
-        }
-        }>{connectionState ? "Disconnect" : "Connect"}</Button>
+            // {
+            //   connectionState ? () => {
+            //     disconnectProvider();
+            //     setConnectionState(false)
+            //   }
+            //     : () => {
+            //       connectProvider();
+            //       setConnectionState(true);
+            //     }
+
+            // }
+          }
+          }>{connectionState ? "Disconnect" : "Connect"}</Button>
         <Button
           variant="no-hover"
           bg="linear-gradient(81.62deg, #313860 2.25%, #151928 79.87%)"
@@ -499,13 +530,14 @@ export default function UserReports() {
               <Text color="gray.400" fontWeight="normal" fontSize="xl">
                 Task {infoData[infoRow].status}
               </Text>
-              {(infoData[infoRow].status === 'Completed') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl"> 40 credits debited </Text>
+              {(infoData[infoRow].status === 'Completed') && (<Flex h="10rem" alignItems="center" direction="column" justifyContent="space-around"><Text color="gray.600" fontWeight="normal" fontSize="xl"> 40 credits debited </Text>
+                <Button>Download Project Details</Button>
               </Flex>)}
               {(infoData[infoRow].status === 'In progress') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">Waiting for final output ⏳</Text></Flex>)}
               {(infoData[infoRow].status === 'Not started') && (<Flex h="10rem" alignItems="center"><Text color="gray.600" fontWeight="normal" fontSize="xl">Yet to start </Text></Flex>)}
-              {nodesData.map((node, index) => {
-                  return (<Text>{`client: ${node.client} status: ${node.status}`}</Text>)
-              })}
+              {/* {nodesData.map((node, index) => {
+                return (<Text>{`client: ${node.client} status: ${node.status}`}</Text>)
+              })} */}
             </Flex>
           </ModalBody>
           <ModalFooter></ModalFooter>

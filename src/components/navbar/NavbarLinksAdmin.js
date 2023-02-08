@@ -154,7 +154,7 @@ export default function HeaderLinks(props) {
 					<Avatar
 						_hover={{ cursor: 'pointer' }}
 						color="white"
-						name="Adela Parkson"
+						name="User"
 						bg="#11047A"
 						size="sm"
 						w="50px"
@@ -173,7 +173,7 @@ export default function HeaderLinks(props) {
 							fontSize="sm"
 							fontWeight="700"
 							color={textColor}>
-							👋&nbsp; Hey, Adela
+							👋&nbsp; Hey, User
 						</Text>
 					</Flex>
 					<Flex flexDirection="column" p="10px">
@@ -190,7 +190,7 @@ export default function HeaderLinks(props) {
 							borderRadius="8px"
 							px="14px">
 							<NavLink to='/admin/default'>
-								<Text fontSize="sm">Provider</Text>
+								<Text fontSize="sm">Provider Dashboard</Text>
 							</NavLink>
 						</MenuItem>
 						<MenuItem
@@ -200,7 +200,7 @@ export default function HeaderLinks(props) {
 							borderRadius="8px"
 							px="14px">
 							<NavLink to='/admin/node'>
-								<Text fontSize="sm">Node</Text>
+								<Text fontSize="sm">Node Dashboard</Text>
 							</NavLink>
 						</MenuItem>
 						<MenuItem
