@@ -213,7 +213,7 @@ export default function UserReports() {
   // socket.emit("join provider", socket.id);
   // };
   const startProject = (project) => {
-    socket.emit("split data", {string:string, project:project});
+    socket.emit("split data", {listToPermute:string, project:project});
     // console.log(string);
     console.log("start project", string);
   };
